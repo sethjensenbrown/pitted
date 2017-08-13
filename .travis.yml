@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: cRPpyv+5m8cNP2edHtY65yWmN2LtGP31a/GRLfBi8NZdEgVjJHg8zlxCkaSEEUdlDFCFRB+Pz1RH4T9G88szCnItIS982NOE5X78Sh2dUiGZFNiuKHgp4aWcA68yV1JjwZCpdxVhEdDfomS4UprzgyWEQKDxUxVnm0cLztPSiuF0DumLQ6B5nJjyLo+fkPMXsPk74PnKd+kT8KbNJn1RDlnriNyN81bh+d5sTjI8ESexqCpIPel5IJUcxWmgE1+2TWmI/SjeARZna5MM4mYsQf8CKEyKdaJtIYXFnklvdXZVQmOuclzek6gObjCpF+YFBiTbJYTygPfv32X+3wZZ0PFBlAQQiSVJGP8aMNM8upBBgqHM7avF3+a/3IDxfmFvr9pVB8x30JX/j9MDajabGnnpW7YfjoAHGygKdnGot6jWZUnjZA0ufu9bhk55LkLgjM7IW65XcEW421OoSOV9kn5IcPkKURzypGDd4z95uQG3jNKZ9KEPmPACPAf3eYgcVAomEkWkrVrTmJyITIXd+lKz6G/MxrZFVOFIiMkBW2vBazSxgT9hQxQ8UjcXQNWKbuj3+M1n+wkIOSOmgS6kmWiyGgtJkVfnc5C9rbf3HUIJSWuJNpIZ6oxLO8tagxxu9PTRzpulTj/DXcIUEmVMdd8uu0x0SVgiK1Jr+pA0ULA=
+  app: pure-caverns-49411
+  on:
+    repo: sethjensenbrown/pitted
