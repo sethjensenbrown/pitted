@@ -4,11 +4,11 @@
   "description": "surf spot database for the LANDLOCKED community",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.15.4",
     "travis": "^0.1.1"
   },
   "devDependencies": {
     "chai": "^4.1.1",
+    "express": "^4.15.4",
     "chai-http": "^3.0.0",
     "mocha": "^3.5.0"
   },
