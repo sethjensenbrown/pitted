@@ -1,7 +1,9 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const should = chai.should();
-const {app} = require('../server');
+var server = require('../server.js');
+var should = chai.should();
+var app = server.app;
+
 chai.use(chaiHttp);
 
 
@@ -13,6 +15,7 @@ describe('server', function() {
 				.get('/')
 				.then(function(res) {
 					res.should.have.status(200);
+					res.should.be.html;
 				})
 	})
 
