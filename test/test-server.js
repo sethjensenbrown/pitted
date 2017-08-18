@@ -7,11 +7,24 @@ chai.use(chaiHttp);
 
 
 
-describe('server', function() {
+describe('home page', function() {
 
-	it('should return 200', function() {
+	it('should get an html response', function() {
 		return chai.request(app)
 				.get('/')
+				.then(function(res) {
+					res.should.have.status(200);
+					res.should.be.html;
+				})
+	})
+
+})
+
+describe('admin page', function() {
+
+	it('should get an html response', function() {
+		return chai.request(app)
+				.get('/admin')
 				.then(function(res) {
 					res.should.have.status(200);
 					res.should.be.html;
