@@ -13,11 +13,12 @@ margin: 10px
   width: 300px
 }
 .search-radio {
-  text-align: left
+  text-align: left;
+margin-left: 60px
 }.search-radio-element {
 }
 .search-state {
-  width: 370px;
+  width: 200px;
 height: 30px
 }
 .radio-element-label {
