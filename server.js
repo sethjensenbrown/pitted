@@ -28,6 +28,11 @@ app.get('/editor', (req, res) => {
 	res.sendFile(__dirname + '/public/editor.html')
 });
 
+//GET request for /editor displays spot editor page
+app.get('/add', (req, res) => {
+	res.sendFile(__dirname + '/public/add.html')
+});
+
 app.listen(process.env.PORT || 8080);
 
 module.exports = {app};

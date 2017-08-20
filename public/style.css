@@ -55,3 +55,17 @@ margin-top: 15px
 #editor-difficulty {
   margin-top: 15px
 }
+.spot-delete {
+  color: #ff0000
+}
+#map-wrapper {
+  width: 500px;
+height: 300px
+}
+
+#map-canvas {
+  height:100%;
+}
+body {
+  margin-bottom: 100px
+}

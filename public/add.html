@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Blank Template for Bootstrap</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="style.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <h1 class="main-title">Pitted</h1>
+                <h2 class="sub-title">Find your wave</h2>
+            </div>
+        </div>
+        <div class="container">
+            <form role="form" class="editor-form" id="editor-form"> 
+                <label for="editor-spot-name" class="form-label">Spot Name:</label>
+                <br>
+                <input class="input-form" id="editor-spot-name" placeholder="ex: Lake Michigan - Bethany Beach">
+                <br>
+                <label for="editor-state" class="form-label">State:</label>
+                <br>
+                <select id="editor-state" class="search-state">
+                    <option selected disabled>Select Your State</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District Of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                </select>
+                <br>
+                <label for="map-wrapper" class="form-label">Spot Location:</label>
+                <div id="map-wrapper">
+                    <div id="map-canvas"></div>
+                </div>
+                <br>
+                <div id="editor-difficulty">
+                    <label class="form-label">Difficulty: </label>
+                    <br>
+                    <input type="radio" id="difficulty-super-chill" name="difficulty" value="Super Chill" checked class="search-radio-element">
+                    <label for="difficulty-super-chill" class="radio-element-label">Super Chill</label>
+                    <br>
+                    <input type="radio" id="difficulty-chill" name="difficulty" value="Chill" class="search-radio-element">
+                    <label for="difficulty-chill" class="radio-element-label">Chill</label>
+                    <br>
+                    <input type="radio" id="difficulty-intermediate" name="difficulty" value="Intermediate" class="search-radio-element">
+                    <label for="difficulty-intermediate" class="radio-element-label">Intermediate</label>
+                    <br>
+                    <input type="radio" id="difficulty-advanced" name="difficulty" value="Advanced" class="search-radio-element">
+                    <label for="difficulty-advanced" class="radio-element-label">Advanced</label>
+                    <br>
+                    <input type="radio" id="difficulty-extreme" name="difficulty" value="EXTREME!" class="search-radio-element">
+                    <label for="difficulty-extreme" class="radio-element-label">EXTREME!</label>
+                    <br>
+                </div>
+                <label for="editor-image-url" class="form-label">Image URL</label>
+                <br>
+                <input class="input-form" id="editor-image-url" placeholder="ex: http://www.landlockedsurfing.com/dopeimage.jpeg">
+                <br>
+                <button type="submit" class="submit-button" id="editor-submit">Submit</button>                 
+            </form>
+        </div>
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Google Maps API -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSfFKYKZiXtoaUPOxUrLsELlgUThzkoPE&callback=initMap">
+        </script>
+        <!--link to JS file-->
+        <script src="add.js"></script>
+    </body>
+</html>
