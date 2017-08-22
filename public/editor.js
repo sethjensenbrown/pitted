@@ -2,18 +2,24 @@ var MOCK_SPOT = {
 	"id": "11111111",
 	"name": "Extreme River Wave",
 	"admin-id": "river_surfer_1",
-	"difficulty": "5",
+	"difficulty": "EXTREME!",
 	"location": {
 		"state": "CO",
-		"latitude": "37.09024",
-		"longitude": "-95.712891"
+		"laditude": "38.95940",
+		"longitude": "-106.52343"
 				}, 
 	"image_url": "http://riverbreak.com/wp-content/uploads/River-Drop-and-Flow-620x350.jpg" 
 	}
 
-var LATITUDE = 37.09024;
-var LONGITUDE = -95.712891;
+//preload all fields with current values in database
+var LATITUDE = parseFloat(MOCK_SPOT.location.laditude);
+var LONGITUDE = parseFloat(MOCK_SPOT.location.longitude);
+$('#editor-spot-name').val(MOCK_SPOT.name);
+$(`option[value='${MOCK_SPOT.location.state}'`).attr('selected', 'selected');
+$(`input[type='radio'][value='${MOCK_SPOT.difficulty}'`).attr('checked', 'checked');
+$('#editor-image-url').val(MOCK_SPOT.image_url);
 
+//handles Google Map
 function initMap() {
 	var map;
     var mapOptions = {
@@ -41,18 +47,29 @@ function initMap() {
 	});
 }
 
+//requires user to enter a spot name
 var getSpotName = () => {
-	return $('#editor-spot-name').val();	
+	var spotName = $('#editor-spot-name').val();
+	if (spotName) {
+		return spotName;
+	}
+	else {
+		alert("Please enter a spot name!");
+		throw new Error("no spot name entered");
+	}
 }
 
+//no verification becuase selector requires selection by nature
 var getState = () => {
 	return $('#editor-state option:checked').val();
 }
 
+//no verification because radio requires selection by nature
 var getDifficulty = () => {
 	return $('#editor-difficulty > input[type=radio]:checked').val();
 }
 
+//no verification because image URL is not required
 var getImageURL = () => {
 	return $('#editor-image-url').val();
 }
@@ -61,16 +78,18 @@ var getImageURL = () => {
 //change to $('#editor-form').submit when adding API
 $('#editor-submit').on('click', (event) => {
 	event.preventDefault();
-	console.log(`{
-		name: ${getSpotName()},
-		location: {
-			state: ${getState()},
-			latitude: ${LATITUDE},
-			longitude: ${LONGITUDE}
-		},
-		difficulty: ${getDifficulty()},
-		image_url: ${getImageURL()}
-	}`);
+	if (confirm('Are you sure you want to submit?')) { 
+		console.log(`{
+			name: ${getSpotName()},
+			location: {
+				state: ${getState()},
+				latitude: ${LATITUDE},
+				longitude: ${LONGITUDE}
+			},
+			difficulty: ${getDifficulty()},
+			image_url: ${getImageURL()}
+		}`);
+	}
 	//API request will go here!
 })
 
