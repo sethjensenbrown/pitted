@@ -1,3 +1,6 @@
+.hidden {
+  display: none;
+}
 .main-title {
   margin: 40px 40px 5px;
 font-size: 75px;
@@ -57,6 +60,9 @@ margin-top: 15px
 }
 .spot-delete {
   color: #ff0000
+}
+.spot-add {
+  margin-left: 15px;
 }
 #map-wrapper {
   width: 500px;
