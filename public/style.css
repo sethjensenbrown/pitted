@@ -75,3 +75,6 @@ height: 300px
 body {
   margin-bottom: 100px
 }
+#search-radius {
+  margin-top: 5px;
+}
