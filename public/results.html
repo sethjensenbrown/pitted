@@ -4,9 +4,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Blank Template for Bootstrap</title>
+        <meta name="description" content="Results page for Pitted. 
+            Displays search results to users.
+            Created as a capstone project for the Thinkful bootcamp.">
+        <meta name="author" content="Seth Jensen Brown">
+        <title>Pitted | results</title>
         <!-- Bootstrap core CSS -->
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->
@@ -26,45 +28,25 @@
                 <h2 class="sub-title">Find your wave</h2>
             </div>
         </div>
-        <div class="container">
-            <div class="map-container">
-                <p>MAP GOES HERE</p>
-            </div>
+        <div id="results-map-wrapper" class="margin-15">
+            <div id="map-canvas"></div>
         </div>
         <hr>
-        <div class="container">
-            <div class="row">
+        <div class="container" id="spots-container">
+            <div class="row hidden" id="spot-template">
                 <div class="col-xs-12">
-                    <h3>Extreme River Wave</h3>
-                    <img src="http://riverbreak.com/wp-content/uploads/River-Drop-and-Flow-620x350.jpg" class="spot-image" /> 
-                    <p><b>Community Leader:</b> river_surfer_1</p>
-                    <p><b>Difficulty:</b> Extremely&nbsp;Difficult!</p>
+                    <h3 class="js-template-name"></h3>
+                    <img src="" class="spot-image js-template-img"/> 
+                    <p><b>Community Leader: </b><span class="js-template-username"></span></p>
+                    <p><b>Difficulty: </b><span class="js-template-difficulty"></span></p>
+                    <p><b>State: </b><span class="js-template-state"></span></p>
+                    <p><b>Latitude: </b><span class="js-template-lad"></span></p>
+                    <p><b>Longitude: </b><span class="js-template-lng"></span></p>
+                    <hr>
                 </div>
             </div>
         </div>
-        <hr>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h3>Chill Paddleboarding Spot</h3>
-                    <img src="https://s-media-cache-ak0.pinimg.com/originals/8d/bb/31/8dbb31176190e835cd22d777e718c98a.jpg" class="spot-image" /> 
-                    <p><b>Community Leader:</b> sup_for_life</p>
-                    <p><b>Difficulty:</b>&nbsp;Super Chill</p>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h3>Best PHX Wake Surf Lake</h3>
-                    <img src="http://wac.450f.edgecastcdn.net/80450F/tri1025.com/files/2013/08/IMG_9169-630x472.jpg" class="spot-image" /> 
-                    <p><b>Community Leader:</b> mastercraft_mike</p>
-                    <p><b>Difficulty:</b>&nbsp;Chill</p>
-                </div>
-            </div>
-        </div>
-        <hr>
+        
         <!-- Bootstrap core JavaScript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
@@ -72,5 +54,10 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Google Maps API -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSfFKYKZiXtoaUPOxUrLsELlgUThzkoPE&callback=initMap">
+        </script>
+        <!--Link to JS file-->
+        <script src="results.js"></script>
     </body>
 </html>

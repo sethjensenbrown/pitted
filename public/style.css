@@ -68,7 +68,10 @@ margin-top: 15px
   width: 500px;
 height: 300px
 }
-
+#results-map-wrapper{
+  width: 700px;
+height: 400px;
+}
 #map-canvas {
   height:100%;
 }
@@ -77,4 +80,8 @@ body {
 }
 #search-radius {
   margin-top: 5px;
+}
+
+.margin-15 {
+  margin-left: 15px;
 }
