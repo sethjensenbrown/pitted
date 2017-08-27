@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/public/home.html')
 });
 
+app.get('/results/state/:state', (req, res) => {
+	res.sendFile(__dirname + '/public/results.html');
+});
+
 //GET request for /results/state/:state displays results page 
 //passing a state code will narrow results to spots in that state
 app.get('/results/state/:state', (req, res) => {
@@ -29,7 +33,6 @@ app.get('/results/state/:state', (req, res) => {
 			console.error(err)
 			res.status(500).json({message: 'Internal server error'});
 		});
-	//res.sendFile(__dirname + '/public/results.html');
 });
 
 //GET request for /admin displays admin login page
