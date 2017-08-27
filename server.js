@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/public/home.html')
 });
 
-app.get('/results/state/:state', (req, res) => {
+app.get('/results', (req, res) => {
 	res.sendFile(__dirname + '/public/results.html');
 });
 
