@@ -20,13 +20,15 @@
     <![endif]-->
     </head>
     <body>
+        <!--Title-->
         <div class="container">
             <div>
                 <h1 class="main-title">Pitted</h1>
                 <h2 class="sub-title">Find your wave</h2>
             </div>
         </div>
-        <div class="container">
+        <!--Search Page-->
+        <div class="container" id="search-container">
             <div class="form-group search-form"> 
                 <label for="search-state" class="form-label">Search By State:</label>
                 <br>
@@ -97,22 +99,28 @@
                     <option value="250">250 miles</option>
                 </select>
                 <br>
-                <!--
-                <label for="select-sport" class="form-label">Sport:</label>
-                <br>
-                <div class="search-radio" id="select-sport">
-                    <input type="radio" id="river-surfing" name="sport" value="river surfing" checked class="search-radio-element">
-                    <label for="river-surfing" class="radio-element-label">River Surfing</label>
-                    <br>
-                    <input type="radio" id="sup" name="sport" value="SUP" class="search-radio-element">
-                    <label for="sup" class="radio-element-label">SUP</label>
-                    <br>
-                    <input type="radio" id="wake-surfing" name="sport" value="Wake Surfing" class="search-radio-element">
-                    <label for="wake-surfing" class="radio-element-label">Wake Surfing</label>
-                    <br>
-                </div>
-                -->
                 <button class="submit-button text-center" id="search-button">Go</button>
+            </div>
+        </div>
+        <!--Results Page-->
+        <div class="container hidden" id="results-container">
+            <div id="results-map-wrapper" class="margin-15">
+                <div id="map-canvas"></div>
+            </div>
+            <hr>
+            <div class="container" id="spots-container">
+                <div class="row hidden" id="spot-template">
+                    <div class="col-xs-12">
+                        <h3 class="js-template-name"></h3>
+                        <img src="" class="spot-image js-template-img"/> 
+                        <p><b>Community Leader: </b><span class="js-template-username"></span></p>
+                        <p><b>Difficulty: </b><span class="js-template-difficulty"></span></p>
+                        <p><b>State: </b><span class="js-template-state"></span></p>
+                        <p><b>Latitude: </b><span class="js-template-lad"></span></p>
+                        <p><b>Longitude: </b><span class="js-template-lng"></span></p>
+                        <hr>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Bootstrap core JavaScript
