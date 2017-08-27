@@ -38,10 +38,8 @@ var makeTemplateArray = (data) => {
 //adds each spot element to DOM
 var addHTML = (templateArray) => {
 	templateArray.forEach((template) => {
-		$('#spots-container').append(template);
+		$('#spots-container').append(template.html());
 	});
-	$('.spot-image').uniform();
-};
 
 //creates a map using Google Map API
 var initMap = (_spots) => {
