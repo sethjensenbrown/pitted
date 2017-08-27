@@ -4,7 +4,9 @@
   "description": "surf spot database for the LANDLOCKED community",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "mongoose": "^4.11.8",
     "travis": "^0.1.1"
   },
   "devDependencies": {
