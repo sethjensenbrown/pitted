@@ -39,7 +39,8 @@ var makeTemplateArray = (data) => {
 var addHTML = (templateArray) => {
 	templateArray.forEach((template) => {
 		$('#spots-container').append(template);
-	})
+	});
+	$('.spot-image').uniform();
 };
 
 //creates a map using Google Map API
