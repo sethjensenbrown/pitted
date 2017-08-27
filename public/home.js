@@ -43,7 +43,8 @@ var addHTML = (templateArray) => {
 };
 
 //creates a map using Google Map API
-var initMap = (spots) => {
+var initMap = (_spots) => {
+	var spots = _spots;
 	var map;
     var bounds = new google.maps.LatLngBounds();
     var mapOptions = {
@@ -118,7 +119,7 @@ $('#search-button').on('click', (event) => {
 	}
 	else {
 		console.log(`Find all spots in ${getState()}`);
-		$.getJSON(window.location.href + 'results/state/' + getState(), (results) => {
+		$.getJSON('https://damp-garden-35226.herokuapp.com/results/state/' + getState(), (results) => {
 			displayResults(results);
 		});
 	}
