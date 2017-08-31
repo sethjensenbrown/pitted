@@ -10,9 +10,18 @@ var getZip = () => {
 	return $('#search-zip-code').val();
 }
 
-//gets radius from form
+//gets radius from form and returns same value in meters
 var getRadius = () => {
-	return $('#search-radius option:checked').val();
+	var rad = $('#search-radius option:checked').val();
+	return (rad*1609.344);
+}
+
+//gets a set of coordinates from provided zip code
+var getCoordinates = (zip) => {
+	var coordinates = $.getJSON(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip},USA`, (results) => {
+		return `[${results.results[0].geometry.location.lng}, ${results.results[0].geometry.location.lat}]`;
+	});
+	return coordinates;
 }
 
 //creates array that holds spot elements
@@ -113,8 +122,8 @@ $('#search-button').on('click', (event) => {
 				throw new Error('no search radius selected');
 			}
 			else {
-				console.log(`Find all spots within ${getRadius()} miles of ${getZip()}`);
-				$.getJSON('https://damp-garden-35226.herokuapp.com/api/geo/' /*search query goes here*/, (results) => {
+				console.log(`Find all spots within ${getRadius()} meters of ${getCoordinates(getZip())}`);
+				$.getJSON(`https://damp-garden-35226.herokuapp.com/api/geo/${getCoordinates(getZip())}-${getRadius()}`, (results) => {
 					displayResults(results);
 				});
 			}

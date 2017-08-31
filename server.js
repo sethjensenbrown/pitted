@@ -37,10 +37,23 @@ app.get('/api/state/:state', (req, res) => {
 
 //GET request to this endpoint with query for geolocation and search radius
 //will return JSON response with all spots within radius of geolocation
-app.get('/api/geo/:geo', (req, res) => {
+app.get('/api/geo/:coordinates-:radius', (req, res) => {
 	SurfSpots
-
-})
+		.find(
+			location:
+       			{ $near :
+			          {
+			            $geometry: { type: "Point",  coordinates: req.params.coordinates },
+			            $maxDistance: (req.params.radius)
+			          }
+			    }
+			)
+		.then((results) => res.json(results))
+		.catch((err) => {
+			console.error(err)
+			res.status(500).json({message: 'Internal server error'});
+		});
+});
 
 //GET request for /admin displays admin login page
 app.get('/admin', (req, res) => {
