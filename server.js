@@ -39,7 +39,7 @@ app.get('/api/state/:state', (req, res) => {
 //will return JSON response with all spots within radius of geolocation
 app.get('/api/geo/:coordinates-:radius', (req, res) => {
 	SurfSpots
-		.find(
+		.find({
 			location:
        			{ $near :
 			          {
@@ -47,7 +47,7 @@ app.get('/api/geo/:coordinates-:radius', (req, res) => {
 			            $maxDistance: (req.params.radius)
 			          }
 			    }
-			)
+			})
 		.then((results) => res.json(results))
 		.catch((err) => {
 			console.error(err)
