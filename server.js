@@ -23,17 +23,24 @@ app.get('/results', (req, res) => {
 	res.sendFile(__dirname + '/public/results.html');
 });
 
-//GET request for /results/state/:state displays results page 
-//passing a state code will narrow results to spots in that state
-app.get('/results/state/:state', (req, res) => {
+//GET request to this endpoint with query for state 
+//will return JSON response with all spots in that state
+app.get('/api/state/:state', (req, res) => {
 	SurfSpots
-		.find({'location.state': req.params.state})
+		.find({'state': req.params.state})
 		.then((results) => res.json(results))
 		.catch((err) => {
 			console.error(err)
 			res.status(500).json({message: 'Internal server error'});
 		});
 });
+
+//GET request to this endpoint with query for geolocation and search radius
+//will return JSON response with all spots within radius of geolocation
+app.get('/api/geo/:geo', (req, res) => {
+	SurfSpots
+
+})
 
 //GET request for /admin displays admin login page
 app.get('/admin', (req, res) => {

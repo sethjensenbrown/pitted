@@ -4,10 +4,10 @@ const surfSpotsSchema = mongoose.Schema({
 	'name': {type: String, required: true},
 	'admin-id': {type: String, required: true},
 	'difficulty': {type: String, required: true},
+	'state': {type: String, required: true},
 	'location': {
-		'state': {type: String, required: true},
-		'laditude': {type: String, required: true},
-		'longitude': {type: String, required: true}
+		'type': {type: String, required: true},
+		'coordinates': {type: Array, required: true}
 	},
 	'image_url': {type: String}
 });

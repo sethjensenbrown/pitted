@@ -70,10 +70,10 @@ $('#editor-submit').on('click', (event) => {
 	if (confirm('Are you sure you want to submit?')) { 
 		console.log(`{
 			name: ${getSpotName()},
+			state: ${getState()},
 			location: {
-				state: ${getState()},
-				latitude: ${LATITUDE},
-				longitude: ${LONGITUDE}
+				type: "Point",
+				coordinates: [${LONGITUDE}, ${LATITUDE}]
 			},
 			difficulty: ${getDifficulty()},
 			image_url: ${getImageURL()}

@@ -1,21 +1,18 @@
 var MOCK_SPOT = {
-	"id": "11111111",
-	"name": "Extreme River Wave",
-	"admin-id": "river_surfer_1",
-	"difficulty": "EXTREME!",
-	"location": {
-		"state": "CO",
-		"laditude": "38.95940",
-		"longitude": "-106.52343"
-				}, 
-	"image_url": "http://riverbreak.com/wp-content/uploads/River-Drop-and-Flow-620x350.jpg" 
-	}
+		"id": "11111111", 
+		"name": "Extreme River Wave", 
+		"admin-id": "river_surfer_1", 
+		"difficulty": "EXTREME!", "state": "CO", 
+		"location": {"type": "Point", "coordinates": [14.70368, 37.83460 ]}, 
+		"image_url": "http://riverbreak.com/wp-content/uploads/River-Drop-and-Flow-620x350.jpg"
+};
+
 
 //preload all fields with current values in database
-var LATITUDE = parseFloat(MOCK_SPOT.location.laditude);
-var LONGITUDE = parseFloat(MOCK_SPOT.location.longitude);
+var LATITUDE = parseFloat(MOCK_SPOT.location.coordinates[1]);
+var LONGITUDE = parseFloat(MOCK_SPOT.location.coordinates[0]);
 $('#editor-spot-name').val(MOCK_SPOT.name);
-$(`option[value='${MOCK_SPOT.location.state}'`).attr('selected', 'selected');
+$(`option[value='${MOCK_SPOT.state}'`).attr('selected', 'selected');
 $(`input[type='radio'][value='${MOCK_SPOT.difficulty}'`).attr('checked', 'checked');
 $('#editor-image-url').val(MOCK_SPOT.image_url);
 
@@ -81,10 +78,10 @@ $('#editor-submit').on('click', (event) => {
 	if (confirm('Are you sure you want to submit?')) { 
 		console.log(`{
 			name: ${getSpotName()},
+			state: ${getState()},
 			location: {
-				state: ${getState()},
-				latitude: ${LATITUDE},
-				longitude: ${LONGITUDE}
+				type: "Point",
+				coordinates: [${LONGITUDE}, ${LATITUDE}]
 			},
 			difficulty: ${getDifficulty()},
 			image_url: ${getImageURL()}

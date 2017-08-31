@@ -27,9 +27,9 @@ var makeTemplateArray = (data) => {
 		template.find('.js-template-img').attr("src", spot.image_url);
 		template.find('.js-template-username').html(spot["admin-id"]);
 		template.find('.js-template-difficulty').html(spot.difficulty);
-		template.find('.js-template-state').html(spot.location.state);
-		template.find('.js-template-lad').html(spot.location.laditude);
-		template.find('.js-template-lng').html(spot.location.longitude);
+		template.find('.js-template-state').html(spot.state);
+		template.find('.js-template-lad').html(spot.location.coordinates[1]);
+		template.find('.js-template-lng').html(spot.location.coordinates[0]);
 		//stores new spot element in template_array
 		return template;
 	})
@@ -63,7 +63,7 @@ var initMap = (_spots) => {
     //loops through the array of spots & places each one on the map  
     for( i = 0; i < spots.length; i++ ) {
         var position = new google.maps.LatLng(
-        	spots[i].location.laditude, spots[i].location.longitude);
+        	spots[i].location.coordinates[1], spots[i].location.coordinates[0]);
         bounds.extend(position);
         marker = new google.maps.Marker({
             position: position,
@@ -113,13 +113,16 @@ $('#search-button').on('click', (event) => {
 				throw new Error('no search radius selected');
 			}
 			else {
-				console.log(`Find all spots within ${getRadius()} miles of ${getZip()}`)
+				console.log(`Find all spots within ${getRadius()} miles of ${getZip()}`);
+				$.getJSON('https://damp-garden-35226.herokuapp.com/api/geo/' /*search query goes here*/, (results) => {
+					displayResults(results);
+				});
 			}
 		}
 	}
 	else {
 		console.log(`Find all spots in ${getState()}`);
-		$.getJSON('https://damp-garden-35226.herokuapp.com/results/state/' + getState(), (results) => {
+		$.getJSON('https://damp-garden-35226.herokuapp.com/api/state/' + getState(), (results) => {
 			displayResults(results);
 		});
 	}
