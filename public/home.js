@@ -18,10 +18,11 @@ var getRadius = () => {
 
 //gets a set of coordinates from provided zip code
 var getCoordinates = (zip) => {
-	var coordinates = $.getJSON(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip},USA`, (results) => {
+	return $.getJSON(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip},USA`, (results) => {
+		console.log(`laditude: ${results.results[0].geometry.location.lat}`);
+		console.log(`longitude: ${results.results[0].geometry.location.lng}`);
 		return `[${results.results[0].geometry.location.lng}, ${results.results[0].geometry.location.lat}]`;
 	});
-	return coordinates;
 }
 
 //creates array that holds spot elements
