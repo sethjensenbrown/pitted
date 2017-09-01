@@ -19,10 +19,6 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/public/home.html')
 });
 
-app.get('/results', (req, res) => {
-	res.sendFile(__dirname + '/public/results.html');
-});
-
 //GET request to this endpoint with query for state 
 //will return JSON response with all spots in that state
 //queries MUST include state parameter
