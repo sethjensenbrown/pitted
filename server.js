@@ -39,21 +39,22 @@ app.get('/api/state/', (req, res) => {
 //will return JSON response with all spots within radius of geolocation
 app.get('/api/geo/', (req, res) => {
 	//troubleshoot form here -- some API issue
-	console.log(`coordinates: ${req.query.coordinates}`);
-	console.log(`radius: ${req.query.radius}`);
+	console.log(`laditude: ${req.query.laditude}, type: ${typeof req.query.laditude}`);
+	console.log(`longitude: ${req.query.longitude}, type: ${typeof req.query.longitude}`);
+	console.log(`radius: ${req.query.radius}, type: ${typeof parseInt(req.query.radius)}`);
 	SurfSpots
 		.find({
 			'location':
        			{ $near :
 			          {
-			            $geometry: { type: "Point",  coordinates: req.query.coordinates },
+			            $geometry: { type: "Point",  coordinates: [parseInt(req.query.longitude), parseInt(req.query.laditude)] },
 			            $maxDistance: parseInt(req.query.radius)
 			          }
 			    }
 			})
 		.then((results) => res.json(results))
 		.catch((err) => {
-			console.error(err)
+			//console.error(err)
 			res.status(500).json({message: 'Internal server error'});
 		});
 });
