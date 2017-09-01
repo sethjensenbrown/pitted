@@ -38,6 +38,9 @@ app.get('/api/state/:state', (req, res) => {
 //GET request to this endpoint with query for geolocation and search radius
 //will return JSON response with all spots within radius of geolocation
 app.get('/api/geo/:coordinates-:radius', (req, res) => {
+	//troubleshoot form here -- some API issue
+	console.log(`coordinates: ${req.params.coordinates}`);
+	console.log(`radius: ${req.params.radius}`);
 	SurfSpots
 		.find({
 			location:
