@@ -118,7 +118,7 @@ $('#search-button').on('click', (event) => {
 				$.getJSON(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip},USA`, (results) => {
 					console.log(`laditude: ${results.results[0].geometry.location.lat}`);
 					console.log(`longitude: ${results.results[0].geometry.location.lng}`);
-					$.getJSON(`https://damp-garden-35226.herokuapp.com/api/geo/[${results.results[0].geometry.location.lng},${results.results[0].geometry.location.lat}]-${getRadius()}`, (results) => {
+					$.getJSON(`https://damp-garden-35226.herokuapp.com/api/geo?coordinates=[${results.results[0].geometry.location.lng},${results.results[0].geometry.location.lat}]&radius=${getRadius()}`, (results) => {
 						displayResults(results);
 					});
 				});
@@ -128,7 +128,7 @@ $('#search-button').on('click', (event) => {
 	}
 	else {
 		console.log(`Find all spots in ${getState()}`);
-		$.getJSON('https://damp-garden-35226.herokuapp.com/api/state/' + getState(), (results) => {
+		$.getJSON('https://damp-garden-35226.herokuapp.com/api/state?state=' + getState(), (results) => {
 			displayResults(results);
 		});
 	}

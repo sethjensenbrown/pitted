@@ -25,9 +25,9 @@ app.get('/results', (req, res) => {
 
 //GET request to this endpoint with query for state 
 //will return JSON response with all spots in that state
-app.get('/api/state/:state', (req, res) => {
+app.get('/api/state/', (req, res) => {
 	SurfSpots
-		.find({'state': req.params.state})
+		.find({'state': req.query.state})
 		.then((results) => res.json(results))
 		.catch((err) => {
 			console.error(err)
@@ -37,17 +37,17 @@ app.get('/api/state/:state', (req, res) => {
 
 //GET request to this endpoint with query for geolocation and search radius
 //will return JSON response with all spots within radius of geolocation
-app.get('/api/geo/:coordinates-:radius', (req, res) => {
+app.get('/api/geo/', (req, res) => {
 	//troubleshoot form here -- some API issue
-	console.log(`coordinates: ${req.params.coordinates}`);
-	console.log(`radius: ${req.params.radius}`);
+	console.log(`coordinates: ${req.query.coordinates}`);
+	console.log(`radius: ${req.query.radius}`);
 	SurfSpots
 		.find({
-			location:
+			'location':
        			{ $near :
 			          {
-			            $geometry: { type: "Point",  coordinates: req.params.coordinates },
-			            $maxDistance: (req.params.radius)
+			            $geometry: { type: "Point",  coordinates: req.query.coordinates },
+			            $maxDistance: (req.query.radius)
 			          }
 			    }
 			})
