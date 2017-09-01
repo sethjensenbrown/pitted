@@ -47,7 +47,7 @@ app.get('/api/geo/', (req, res) => {
        			{ $near :
 			          {
 			            $geometry: { type: "Point",  coordinates: req.query.coordinates },
-			            $maxDistance: (req.query.radius)
+			            $maxDistance: parseInt(req.query.radius)
 			          }
 			    }
 			})
