@@ -25,6 +25,7 @@ app.get('/results', (req, res) => {
 
 //GET request to this endpoint with query for state 
 //will return JSON response with all spots in that state
+//queries MUST include state parameter
 app.get('/api/state/', (req, res) => {
 	SurfSpots
 		.find({'state': req.query.state})
@@ -35,19 +36,20 @@ app.get('/api/state/', (req, res) => {
 		});
 });
 
-//GET request to this endpoint with query for geolocation and search radius
-//will return JSON response with all spots within radius of geolocation
+//GET request to this endpoint with query for lat, lng, and search radius
+//will return JSON response with all spots within radius of coordinates
+//uses mongoDB $near query and GeoJSON points to search all spots
+//queries MUST include laitude, longitude and radius parameters
 app.get('/api/geo/', (req, res) => {
-	//troubleshoot form here -- some API issue
-	console.log(`laditude: ${req.query.laditude}, type: ${typeof req.query.laditude}`);
-	console.log(`longitude: ${req.query.longitude}, type: ${typeof req.query.longitude}`);
-	console.log(`radius: ${req.query.radius}, type: ${typeof parseInt(req.query.radius)}`);
 	SurfSpots
 		.find({
 			'location':
        			{ $near :
 			          {
-			            $geometry: { type: "Point",  coordinates: [parseInt(req.query.longitude), parseInt(req.query.laditude)] },
+			            $geometry: { 
+			            	type: "Point",  
+			            	coordinates: [parseInt(req.query.longitude), parseInt(req.query.laditude)] 
+			            },
 			            $maxDistance: parseInt(req.query.radius)
 			          }
 			    }

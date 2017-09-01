@@ -13,6 +13,7 @@ var getZip = () => {
 //gets radius from form and returns same value in meters
 var getRadius = () => {
 	var rad = $('#search-radius option:checked').val();
+	//converts to meters
 	return (rad*1609);
 }
 
@@ -50,7 +51,7 @@ var initMap = (_spots) => {
     var bounds = new google.maps.LatLngBounds();
     var mapOptions = {
     	center: {lat: 38, lng: -19},
-  		zoom: 3,
+  		zoom: 6,
         mapTypeId: 'roadmap'
     };
                     
@@ -88,10 +89,15 @@ var initMap = (_spots) => {
     }
 }
 
+//this function takes an array of spots and turns the search page into a results page
 var displayResults = (results) => {
+	//hides search form
 	$('#search-container').addClass('hidden');
+	//generates map with results data
 	initMap(results);
+	//adds spot info to the DOM
 	addHTML(makeTemplateArray(results));
+	//displays map and spot info
 	$('#results-container').removeClass('hidden');
 }
 
@@ -101,7 +107,6 @@ $('#search-button').on('click', (event) => {
 	//zip is prioritized over state if both are entered
 	if (getZip()) {
 		var zip = parseInt(getZip());
-		console.log(zip);
 		//checks to make sure zip code is valid
 		if (!(/^\d{5}(-\d{4})?(?!-)$/.test(zip))) {
 			alert('Please enter a valid 5-digit zip code. (hint: no spaces)');
@@ -114,20 +119,41 @@ $('#search-button').on('click', (event) => {
 				throw new Error('no search radius selected');
 			}
 			else {
-				console.log(`Find all spots within ${getRadius()} meters of ${getZip()}`);
+				//first getJSON request uses the google maps geocoder API 
+				//to turn the zip code from the query into a geograpical coordinate 
 				$.getJSON(`https://maps.googleapis.com/maps/api/geocode/json?address=${zip},USA`, (results) => {
+					//second getJSON request queries pitted API for all surf spots
+					//withing the given radius of the geogrphical coordinate figured above
+					//returns JSON response of those spots found
 					$.getJSON(`https://damp-garden-35226.herokuapp.com/api/geo?longitude=${results.results[0].geometry.location.lng}&laditude=${results.results[0].geometry.location.lat}&radius=${getRadius()}`, (results) => {
-						displayResults(results);
+						//if no results are returned it throws error and alert window
+						if (results.length < 1) {
+							alert('No spots were found, please try again');
+							throw new Error('no spots found');
+						}
+						//if results are returned it disaplys them on the page
+						else {
+							displayResults(results);
+						}
 					});
 				});
 				
 			}
 		}
 	}
+	//if no zip is entered, the seacrh is based on the spot's state
+	//getJSON request to pitted API returns all spots in that state
 	else {
-		console.log(`Find all spots in ${getState()}`);
 		$.getJSON('https://damp-garden-35226.herokuapp.com/api/state?state=' + getState(), (results) => {
-			displayResults(results);
+			//if no results are returned it throws error and alert window
+			if (results.length < 1) {
+				alert('No spots were found, please try again');
+				throw new Error('no spots found');
+			}
+			//if results are returned it disaplys them on the page
+			else {
+				displayResults(results);
+			}
 		});
 	}
 })
