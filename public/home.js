@@ -13,7 +13,7 @@ var getZip = () => {
 //gets radius from form and returns same value in meters
 var getRadius = () => {
 	var rad = $('#search-radius option:checked').val();
-	return (rad*1609.344);
+	return (rad*1609);
 }
 
 //creates array that holds spot elements
