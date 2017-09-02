@@ -68,6 +68,7 @@ var getImageURL = () => {
 $('#editor-submit').on('click', (event) => {
 	event.preventDefault();
 	if (confirm('Are you sure you want to submit?')) { 
+		//console.log(`db.surfspots.insertOne({name: "${getSpotName()}", state: "${getState()}", location: {type: "Point", coordinates: [${LONGITUDE}, ${LATITUDE}]}, difficulty: "${getDifficulty()}", image_url: "${getImageURL()}"})`);
 		console.log(`{
 			name: ${getSpotName()},
 			state: ${getState()},
