@@ -109,6 +109,19 @@ app.post('/api/add', (req, res) => {
 		});
 });
 
+//PUT endpoint for editing spot data
+app.put('/api/edit/:id', (req, res) => {
+	if (!(req.params.id === req.body._id)) {
+		res.status(400).json({eror: 'Request path id must match request body id'});
+	}
+
+	SurfSpots
+		.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
+		.then((updatedSpot) => {res.status(201).json(updatedSpot)})
+		.catch((err) => {res.status(500).json({message: 'Something went wrong'})});
+});
+
+
 
 /************************************************************/
 

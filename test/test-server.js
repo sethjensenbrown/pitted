@@ -166,6 +166,44 @@ describe('Pitted dynamic API endpoints', function() {
 		})
 	})
 
+	describe('API PUT endpoint', function() {
+		it('should update an existing spot', function () {
+			const updateData = {
+				name: 'Wait... THIS is the spot name!',
+				difficulty: 'EXTREME!',
+				state: 'LA',
+				image_url: 'www.thatotherimage.com',
+				location: {
+					type: 'Point',
+					coordinates: [10,10]
+				}
+			};
+
+			return SurfSpots
+			.findOne()
+			.then(function(spot) {
+				updateData._id = spot._id;
+				return chai.request(app)
+					.put(`/api/edit/${spot._id}`)
+					.send(updateData);
+			})
+			.then(function(res) {
+				res.should.have.status(201);
+				res.should.be.json;
+				res.body.should.be.a('object');
+				res.body.should.have.all.keys('__v', '_id', 'name', 'state', 'location', 'difficulty', 'image_url', 'admin_id');
+				res.body.location.should.have.all.keys('type', 'coordinates');
+				res.body.name.should.equal(updateData.name);
+				res.body.difficulty.should.equal(updateData.difficulty);
+				res.body.state.should.equal(updateData.state);
+				res.body.image_url.should.equal(updateData.image_url);
+				res.body.location.type.should.equal(updateData.location.type);
+				res.body.location.coordinates[0].should.equal(updateData.location.coordinates[0]);
+				res.body.location.coordinates[1].should.equal(updateData.location.coordinates[1]);
+			})
+		})
+	})
+
 });
 
 
