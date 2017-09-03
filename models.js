@@ -12,6 +12,8 @@ const surfSpotsSchema = mongoose.Schema({
 	'image_url': {type: String}
 });
 
+surfSpotsSchema.index({location : "2dsphere" });
+
 const SurfSpots = mongoose.model('SurfSpots', surfSpotsSchema);
 
 module.exports = {SurfSpots};
