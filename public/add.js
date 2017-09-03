@@ -63,12 +63,18 @@ var getImageURL = () => {
 	return $('#editor-image-url').val();
 }
 
+//no verification because adminID is required to add spot
+var getAdminID = () => {
+	//will replace with function to grab admin id from JWT
+	return 'master-admin';
+}
+
 //updates spot on form submit
 //change to $('#editor-form').submit when adding API
 $('#editor-submit').on('click', (event) => {
 	event.preventDefault();
 	if (confirm('Are you sure you want to submit?')) { 
-		//console.log(`db.surfspots.insertOne({name: "${getSpotName()}", state: "${getState()}", location: {type: "Point", coordinates: [${LONGITUDE}, ${LATITUDE}]}, difficulty: "${getDifficulty()}", image_url: "${getImageURL()}"})`);
+		console.log(`db.surfspots.insertOne({name: "${getSpotName()}", state: "${getState()}", location: {type: "Point", coordinates: [${LONGITUDE}, ${LATITUDE}]}, difficulty: "${getDifficulty()}", image_url: "${getImageURL()}", admin_id: "${getAdminID()}"})`);
 		console.log(`{
 			name: ${getSpotName()},
 			state: ${getState()},
@@ -77,7 +83,8 @@ $('#editor-submit').on('click', (event) => {
 				coordinates: [${LONGITUDE}, ${LATITUDE}]
 			},
 			difficulty: ${getDifficulty()},
-			image_url: ${getImageURL()}
+			image_url: ${getImageURL()},
+			admin_id: ${getAdminID()}
 		}`);
 	}
 	//API request will go here!

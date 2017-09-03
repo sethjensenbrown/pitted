@@ -1,8 +1,9 @@
 var MOCK_SPOT = {
-		"id": "11111111", 
+		"_id": "11111111", 
 		"name": "Extreme River Wave", 
-		"admin-id": "river_surfer_1", 
-		"difficulty": "EXTREME!", "state": "CO", 
+		"admin_id": "river_surfer_1", 
+		"difficulty": "EXTREME!", 
+		"state": "CO", 
 		"location": {"type": "Point", "coordinates": [14.70368, 37.83460 ]}, 
 		"image_url": "http://riverbreak.com/wp-content/uploads/River-Drop-and-Flow-620x350.jpg"
 };
@@ -71,6 +72,12 @@ var getImageURL = () => {
 	return $('#editor-image-url').val();
 }
 
+//no verification because adminID is required to add spot
+var getAdminID = () => {
+	//will replace with function to grab admin id from JWT
+	return 'master-admin';
+}
+
 //updates spot on form submit
 //change to $('#editor-form').submit when adding API
 $('#editor-submit').on('click', (event) => {
@@ -84,7 +91,8 @@ $('#editor-submit').on('click', (event) => {
 				coordinates: [${LONGITUDE}, ${LATITUDE}]
 			},
 			difficulty: ${getDifficulty()},
-			image_url: ${getImageURL()}
+			image_url: ${getImageURL()},
+			admin_id: ${getAdminID()}
 		}`);
 	}
 	//API request will go here!

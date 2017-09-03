@@ -87,7 +87,7 @@ describe('Pitted API', function() {
 					res.body.should.have.lengthOf(5);
 					res.body.forEach(function(spot) {
 						spot.should.be.a('object');
-						spot.should.have.all.keys('_id', 'name', 'state', 'location', 'difficulty', 'image_url');
+						spot.should.have.all.keys('_id', 'name', 'state', 'location', 'difficulty', 'image_url', 'admin_id');
 						spot.location.should.have.all.keys('type', 'coordinates');
 						spot.location.type.should.equal('Point');
 						spot.state.should.equal('MI');
@@ -106,7 +106,7 @@ describe('Pitted API', function() {
 					res.body.should.have.lengthOf(5);
 					res.body.forEach(function(spot) {
 						spot.should.be.a('object');
-						spot.should.have.all.keys('_id', 'name', 'state', 'location', 'difficulty', 'image_url');
+						spot.should.have.all.keys('_id', 'name', 'state', 'location', 'difficulty', 'image_url', 'admin_id');
 						spot.location.should.have.all.keys('type', 'coordinates');
 						spot.location.type.should.equal('Point');
 						spot.state.should.equal('CA');
@@ -127,7 +127,7 @@ describe('Pitted API', function() {
 					res.body.should.have.lengthOf(5);
 					res.body.forEach(function(spot) {
 						spot.should.be.a('object');
-						spot.should.have.all.keys('_id', 'name', 'state', 'location', 'difficulty', 'image_url');
+						spot.should.have.all.keys('_id', 'name', 'state', 'location', 'difficulty', 'image_url', 'admin_id');
 						spot.location.should.have.all.keys('type', 'coordinates');
 						spot.location.type.should.equal('Point');
 						spot.state.should.equal('MI');
@@ -146,7 +146,7 @@ describe('Pitted API', function() {
 					res.body.should.have.lengthOf(5);
 					res.body.forEach(function(spot) {
 						spot.should.be.a('object');
-						spot.should.have.all.keys('_id', 'name', 'state', 'location', 'difficulty', 'image_url');
+						spot.should.have.all.keys('_id', 'name', 'state', 'location', 'difficulty', 'image_url', 'admin_id');
 						spot.location.should.have.all.keys('type', 'coordinates');
 						spot.location.type.should.equal('Point');
 						spot.state.should.equal('CA');

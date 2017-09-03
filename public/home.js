@@ -27,7 +27,7 @@ var makeTemplateArray = (data) => {
 		//replaces template values with spot values
 		template.find('.js-template-name').html(spot.name);
 		template.find('.js-template-img').attr("src", spot.image_url);
-		template.find('.js-template-username').html(spot["admin-id"]);
+		template.find('.js-template-username').html(spot.admin_id);
 		template.find('.js-template-difficulty').html(spot.difficulty);
 		template.find('.js-template-state').html(spot.state);
 		template.find('.js-template-lad').html(spot.location.coordinates[1]);

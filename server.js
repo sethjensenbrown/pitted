@@ -19,6 +19,26 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/public/home.html')
 });
 
+//GET request for /admin displays admin login page
+app.get('/admin', (req, res) => {
+	res.sendFile(__dirname + '/public/admin.html')
+});
+
+//GET request for /admin-menu displays admin menu page
+app.get('/admin-menu', (req, res) => {
+	res.sendFile(__dirname + '/public/admin-menu.html')
+});
+
+//GET request for /editor displays spot editor page
+app.get('/editor', (req, res) => {
+	res.sendFile(__dirname + '/public/editor.html')
+});
+
+//GET request for /editor displays spot editor page
+app.get('/add', (req, res) => {
+	res.sendFile(__dirname + '/public/add.html')
+});
+
 //GET request to this endpoint with query for state 
 //will return JSON response with all spots in that state
 //queries MUST include state parameter
@@ -57,25 +77,38 @@ app.get('/api/geo/', (req, res) => {
 		});
 });
 
-//GET request for /admin displays admin login page
-app.get('/admin', (req, res) => {
-	res.sendFile(__dirname + '/public/admin.html')
+//POST endpoint to add spots to the database
+app.post('/api/add', (req, res) => {
+	const requiredFields = ['name', 'state', 'difficulty', 'image_url', 'location', 'admin_id'];
+	for (let i=0; i<requiredFields; i++) {
+		const field = requiredFields[i];
+		if (!(field in req.body)) {
+			const message = `missing ${field} in request body`;
+			console.error(message);
+			return res.status(400).send(message);
+		}
+	}
+	SurfSpots
+		.create({
+			name: req.body.name,
+			state: req.body.state,
+			location: {
+				type: req.body.location.type,
+				coordinates: req.body.location.coordinates
+			},
+			difficulty: req.body.difficulty,
+			admin_id: req.body.admin_id,
+			image_url: req.body.image_url
+		})
+		.then((newSpot) => {
+			res.status(201).json(newSpot);
+		})
+		.catch((err) => {
+			console.error(err);
+			res.status(500).json({error: 'Something went wrong'});
+		});
 });
 
-//GET request for /admin-menu displays admin menu page
-app.get('/admin-menu', (req, res) => {
-	res.sendFile(__dirname + '/public/admin-menu.html')
-});
-
-//GET request for /editor displays spot editor page
-app.get('/editor', (req, res) => {
-	res.sendFile(__dirname + '/public/editor.html')
-});
-
-//GET request for /editor displays spot editor page
-app.get('/add', (req, res) => {
-	res.sendFile(__dirname + '/public/add.html')
-});
 
 /************************************************************/
 
