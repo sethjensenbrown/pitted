@@ -38,7 +38,7 @@ describe('Pitted dynamic API endpoints', function() {
 
 	after(function() {
 		return closeServer();
-	})
+	});
 
 	describe('state search endpoint', function() {
 		it('should return all spots in MI', function() {
@@ -204,6 +204,26 @@ describe('Pitted dynamic API endpoints', function() {
 		})
 	})
 
+	describe('API DELETE endpoint', function() {
+		it('should delete a surf spot', function() {
+			let deleteID;
+			return SurfSpots
+				.findOne()
+				.then(function(spot) {
+					deleteID = spot._id
+					return chai.request(app)
+						.delete(`/api/delete/${deleteID}`)
+				})
+				.then(function(res) {
+					res.should.have.status(204);
+					return SurfSpots.findById(deleteID);
+				})
+				.then(function(nonSpot) {
+					should.not.exist(nonSpot);
+				});
+		})
+	})
+
 });
 
 
@@ -216,7 +236,7 @@ describe('Pitted static pages endpoints', function() {
 
 	after(function() {
 		return closeServer();
-	})
+	});
 
 	describe('home page', function() {
 		it('should get an html response', function() {

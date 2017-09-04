@@ -121,6 +121,15 @@ app.put('/api/edit/:id', (req, res) => {
 		.catch((err) => {res.status(500).json({message: 'Something went wrong'})});
 });
 
+//DELETE endpoint
+app.delete('/api/delete/:id', (req,res) => {
+	SurfSpots
+		.findByIdAndRemove(req.params.id)
+		.then(() => {
+			console.log(`Deleted surf spot with _id: ${req.params.id}`);
+			res.status(204).end();
+		});
+}); 
 
 
 /************************************************************/
