@@ -6,11 +6,15 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "faker": "^4.1.0",
+    "jsonwebtoken": "^7.4.3",
     "mongoose": "^4.11.8",
     "morgan": "^1.8.2",
     "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-jwt": "^3.0.0",
     "travis": "^0.1.1"
   },
   "devDependencies": {

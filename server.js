@@ -1,5 +1,6 @@
 //SETUP
 
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -7,6 +8,7 @@ const morgan = require('morgan');
 const passport = require('passport');
 
 const {router: usersRouter} = require('./users');
+const {router: authRouter, basicStrategy, jwtStrategy} = require('./auth');
 
 //forces mongoose to use es6 promises instead of it's own
 mongoose.Promise = global.Promise;
@@ -19,6 +21,10 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use('/api/users/', usersRouter);
+app.use('/api/auth', authRouter);
+app.use(passport.initialize());
+passport.use(basicStrategy);
+passport.use(jwtStrategy);
 
 // CORS
 app.use(function (req, res, next) {
