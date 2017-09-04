@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const passport = reuire('passport');
+const passport = require('passport');
 
 //forces mongoose to use es6 promises instead of it's own
 mongoose.Promise = global.Promise;
