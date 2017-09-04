@@ -17,7 +17,7 @@ describe('Users API POST endpoint', function() {
 	const lastName = 'Goku';
 
 	before(function() {
-		return runServer();
+		return runServer(TEST_DATABASE_URL);
 	});
 
 	afterEach(function() {
