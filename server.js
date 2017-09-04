@@ -1,8 +1,12 @@
+//SETUP
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
+
+const {router: usersRouter} = require('./users');
 
 //forces mongoose to use es6 promises instead of it's own
 mongoose.Promise = global.Promise;
@@ -14,6 +18,7 @@ const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(morgan('common'));
+app.use('/api/users/', usersRouter);
 
 // CORS
 app.use(function (req, res, next) {
@@ -25,8 +30,9 @@ app.use(function (req, res, next) {
   }
   next();
 });
-
 /***********************************************************/
+
+//STATIC PAGES ENDPOINTS
 
 //GET request for / displays home page, search for spots here
 app.get('/', (req, res) => {
@@ -52,6 +58,9 @@ app.get('/editor', (req, res) => {
 app.get('/add', (req, res) => {
 	res.sendFile(__dirname + '/public/add.html')
 });
+/***********************************************************/
+
+//DYNAMIC API ENDPOINTS
 
 //GET request to this endpoint with query for state 
 //will return JSON response with all spots in that state
@@ -144,9 +153,9 @@ app.delete('/api/delete/:id', (req,res) => {
 			res.status(204).end();
 		});
 }); 
-
-
 /************************************************************/
+
+//SERVER CONTROLS
 
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
