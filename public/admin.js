@@ -12,9 +12,9 @@ var getPassword = () => {
 $('#login-submit').on('click', (event) => {
 	event.preventDefault();
 	$.ajax({
-		mathod: 'POST',
+		method: 'POST',
 		url:'https://damp-garden-35226.herokuapp.com/api/auth/login',
 		headers: {'Authorization': 'Basic ' + btoa(`${getLogin()}: ${getPassword()}`)},
-		success: res => console.log(res)
+		success: res => console.log(Success!!)
 	});
 });
