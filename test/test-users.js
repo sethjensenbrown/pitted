@@ -15,10 +15,6 @@ describe('Users API POST endpoint', function() {
 	const password = 'SPIRITBOMB!';
 	const firstName = 'Son';
 	const lastName = 'Goku';
-	const username2 = 'master_vegeta';
-	const password2 = 'BEATgoku123';
-	const firstName2 = 'San';
-	const lastName2 = 'Vegeta';
 
 	before(function() {
 		return runServer();
