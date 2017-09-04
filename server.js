@@ -21,7 +21,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use('/api/users/', usersRouter);
-app.use('/api/auth', authRouter);
+app.use('/api/auth/', authRouter);
 app.use(passport.initialize());
 passport.use(basicStrategy);
 passport.use(jwtStrategy);
