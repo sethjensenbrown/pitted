@@ -15,6 +15,6 @@ $('#login-submit').on('click', (event) => {
 		method: 'POST',
 		url:'https://damp-garden-35226.herokuapp.com/api/auth/login',
 		headers: {'Authorization': 'Basic ' + btoa(`${getLogin()}: ${getPassword()}`)},
-		success: res => console.log(Success!!)
+		success: res => console.log('Success!!')
 	});
 });
