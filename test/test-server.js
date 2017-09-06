@@ -244,9 +244,30 @@ describe('Pitted dynamic API endpoints', function() {
 
 
 describe('Pitted static pages endpoints', function() {
+	const username = 'goku_rulz';
+	const password = 'SPIRITBOMB!';
+	const firstName = 'Son';
+	const lastName = 'Goku';
 
 	before(function() {
 		return runServer(TEST_DATABASE_URL);
+	});
+
+	beforeEach(function() {
+		seedBlogPostData();
+		return User.hashPassword(password).then(password => 
+			User.create({
+				username,
+				password,
+				firstName,
+				lastName
+			})
+		);
+	});
+
+	afterEach(function() {
+		tearDownDb();
+		return User.remove({});
 	});
 
 	after(function() {
