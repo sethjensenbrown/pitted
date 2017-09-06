@@ -13,14 +13,12 @@ $('#login-submit').on('click', (event) => {
 	event.preventDefault();
 	var user = getLogin();
 	var password = getPassword();
+	//converts username and password to Base64 for authorization
 	var base64encodedData = btoa(user + ':' + password);
-	console.log(`user: ${user}`);
-	console.log(`password: ${password}`);
-	console.log(`base64encodedData: ${base64encodedData}`)
 	$.ajax({
 		method: 'POST',
-		url:'https://damp-garden-35226.herokuapp.com/api/auth/login',
+		url:'/api/auth/login',
 		headers: {'Authorization': 'Basic ' + base64encodedData},
-		success: res => window.location.href = `/admin-menu?jwt=${res.authToken}`
+		success: res => window.location.href = `/admin-menu?jwt=${res.authToken}&user=${user}`
 	});
 });
