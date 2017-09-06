@@ -1,10 +1,10 @@
 //creates an object that holds the key value pairs from the URL query
 //should have values for user and jwt 
-const query = new URLSearchParams(window.location.search)
+const query = new URLSearchParams(window.location.search);
 
 //stores all spot info for the user in SPOT_DATA
 const SPOT_DATA = [];
-$.getJSON(`/api/admin_id?admin_id=${query.user}`, res => {
+$.getJSON(`/api/admin_id?admin_id=${query.get('user')}`, res => {
 	res.map(spot => SPOT_DATA.push(spot));
 });
 
