@@ -104,8 +104,7 @@ describe('Auth endpoints', function() {
 				expiresIn: '1d'
 			});
 			return chai.request(app)
-				.post('/api/auth/refresh')
-				.set('Authorization', `Bearer ${token}`)
+				.post(`/api/auth/refresh?jwt=${token}`)
 				.catch(err => {
 					const res = err.response;
 					res.should.have.status(401);
@@ -124,8 +123,7 @@ describe('Auth endpoints', function() {
 				subject: username
 			});
 			return chai.request(app)
-				.post('/api/auth/refresh')
-				.set('Authorization', `Bearer ${token}`)
+				.post(`/api/auth/refresh?jwt=${token}`)
 				.catch(err => {
 					const res = err.response;
 					res.should.have.status(401);
@@ -145,8 +143,7 @@ describe('Auth endpoints', function() {
 			});
 			const decode = jwt.decode(token);
 			return chai.request(app)
-				.post('/api/auth/refresh')
-				.set('Authorization', `Bearer ${token}`)
+				.post(`/api/auth/refresh?jwt=${token}`)
 				.then(res => {
 					res.should.have.status(200);
 					res.body.should.be.an('object');

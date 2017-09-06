@@ -1,12 +1,14 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const should = chai.should();
 
 const {app, runServer, closeServer} = require('../server');
+const {User} = require('../users/');
 const {SurfSpots} = require('../models');
-const {TEST_DATABASE_URL} = require('../config');
+const {JWT_SECRET, TEST_DATABASE_URL} = require('../config');
 const {TEST_SPOTS_SEED_DATA} = require('../TEST_SPOTS_SEED_DATA');
 
 chai.use(chaiHttp);
@@ -23,17 +25,30 @@ function tearDownDb() {
 };
 
 describe('Pitted dynamic API endpoints', function() {
+	const username = 'goku_rulz';
+	const password = 'SPIRITBOMB!';
+	const firstName = 'Son';
+	const lastName = 'Goku';
 
 	before(function() {
 		return runServer(TEST_DATABASE_URL);
 	});
 
 	beforeEach(function() {
-		return seedBlogPostData();
+		seedBlogPostData();
+		return User.hashPassword(password).then(password => 
+			User.create({
+				username,
+				password,
+				firstName,
+				lastName
+			})
+		);
 	});
 
 	afterEach(function() {
-		return tearDownDb();
+		tearDownDb();
+		return User.remove({});
 	});
 
 	after(function() {
@@ -262,8 +277,19 @@ describe('Pitted static pages endpoints', function() {
 
 	describe('admin menu page', function() {
 		it('should get an html response', function() {
+			const token = jwt.sign({
+				user: {
+					username,
+					firstName,
+					lastName
+				} 
+			}, JWT_SECRET, {
+				algorithm: 'HS256',
+				subject: username,
+				expiresIn: '1d'
+			});
 			return chai.request(app)
-					.get('/admin-menu')
+					.get(`/admin-menu?jwt=${token}`)
 					.then(function(res) {
 						res.should.have.status(200);
 						res.should.be.html;
