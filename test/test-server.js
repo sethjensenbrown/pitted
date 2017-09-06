@@ -95,6 +95,27 @@ describe('Pitted dynamic API endpoints', function() {
 		})
 	})
 
+	describe('admin_id search endpoint', function() {
+		it('should return all spots in master-admin', function() {
+			return chai.request(app)
+				.get('/api/admin_id?admin_id=master-admin')
+				.then(function(_res) {
+					res = _res;
+					res.should.have.status(200);
+					res.should.be.json;
+					res.body.should.be.a('array');
+					res.body.should.have.lengthOf(10);
+					res.body.forEach(function(spot) {
+						spot.should.be.a('object');
+						spot.should.have.all.keys('__v', '_id', 'name', 'state', 'location', 'difficulty', 'image_url', 'admin_id');
+						spot.location.should.have.all.keys('type', 'coordinates');
+						spot.location.type.should.equal('Point');
+						spot.admin_id.should.equal('master-admin');
+					})
+				})
+		})
+	})
+
 	describe('zip code search endpoint', function() {
 		it('should find spots near Bethany Beach, MI', function() {
 			return chai.request(app)

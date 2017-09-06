@@ -81,6 +81,19 @@ app.get('/api/state/', (req, res) => {
 		});
 });
 
+//GET request to this endpoint with query for state 
+//will return JSON response with all spots created by that admin
+//queries MUST include admin_id parameter
+app.get('/api/admin_id/', (req, res) => {
+	SurfSpots
+		.find({'admin_id': req.query.admin_id})
+		.then((results) => res.json(results))
+		.catch((err) => {
+			console.error(err)
+			res.status(500).json({message: 'Internal server error'});
+		});
+});
+
 //GET request to this endpoint with query for lat, lng, and search radius
 //will return JSON response with all spots within radius of coordinates
 //uses mongoDB $near query and GeoJSON points to search all spots

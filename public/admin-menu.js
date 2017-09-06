@@ -1,14 +1,15 @@
-const MOCK_DATA = {
-	spots: [
-			{"name": "Extreme River Wave", "admin_id": "river_surfer_1", "difficulty": "EXTREME!", "state": "CO", "location": {"type": "Point", "coordinates": [14.70368, 37.83460 ]}, "image_url": "http://riverbreak.com/wp-content/uploads/River-Drop-and-Flow-620x350.jpg"},,
-			{"name": "Chill Paddleboarding Spot", "admin_id": "sup_for_life", "difficulty": "Super Chill", "state": "MI", "location": {"type": "Point", "coordinates": [-132.11670, 31.51845]}, "image_url": "https://s-media-cache-ak0.pinimg.com/originals/8d/bb/31/8dbb31176190e835cd22d777e718c98a.jpg"},
-			{"name": "Best PHX Wake Surf Lake", "admin_id": "mastercraft_mike", "difficulty": "Chill", "state": "AZ", "location": {"type": "Point", "coordinates": [10.85522, -31.14076]}, "image_url": "http://wac.450f.edgecastcdn.net/80450F/tri1025.com/files/2013/08/IMG_9169-630x472.jpg"},
-			{"name": "Sky Surfer's Unite", "admin_id": "air_rider", "difficulty": "EXTREME!", "state": "CA", "location": {"type": "Point", "coordinates": [63.03260, -56.01832]}, "image_url": "http://www.nzoneskydive.co.nz/Portals/19/Images/media/1_Skysurfing%20over%20Queenstown%20with%20NZONE's%20Sasa%20Jojic.JPG"},
-			{"name": "Perfect Wave Every Time", "admin_id": "kelly_slater", "difficulty": "Intermediate", "state": "TX", "location": {"type": "Point", "coordinates": [174.73297, -29.67161]}, "image_url": "https://www.surfertoday.com/images/stories/surfingtyphoonlagoon.jpg"}		   ]
-};
+//creates an object that holds the key value pairs from the URL query
+//should have values for user and jwt 
+const query = new URLSearchParams(window.location.search)
+
+//stores all spot info for the user in SPOT_DATA
+const SPOT_DATA = [];
+$.getJSON(`/api/admin_id?admin_id=${query.user}`, res => {
+	res.map(spot => SPOT_DATA.push(spot));
+});
 
 //creates array that holds spot elements
-var template_array = MOCK_DATA.spots.map((spot) => {
+var template_array = SPOT_DATA.map((spot) => {
 	//spot elements based on template in admin-menu.html file
 	var template = $('#spot-template').clone();
 	//original template is hidden
