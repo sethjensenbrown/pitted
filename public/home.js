@@ -125,7 +125,7 @@ $('#search-button').on('click', (event) => {
 					//second getJSON request queries pitted API for all surf spots
 					//withing the given radius of the geogrphical coordinate figured above
 					//returns JSON response of those spots found
-					$.getJSON(`https://damp-garden-35226.herokuapp.com/api/geo?longitude=${results.results[0].geometry.location.lng}&laditude=${results.results[0].geometry.location.lat}&radius=${getRadius()}`, (results) => {
+					$.getJSON(`/api/geo?longitude=${results.results[0].geometry.location.lng}&laditude=${results.results[0].geometry.location.lat}&radius=${getRadius()}`, (results) => {
 						//if no results are returned it throws error and alert window
 						if (results.length < 1) {
 							alert('No spots were found, please try again');
@@ -144,7 +144,7 @@ $('#search-button').on('click', (event) => {
 	//if no zip is entered, the seacrh is based on the spot's state
 	//getJSON request to pitted API returns all spots in that state
 	else {
-		$.getJSON('https://damp-garden-35226.herokuapp.com/api/state?state=' + getState(), (results) => {
+		$.getJSON('/api/state?state=' + getState(), (results) => {
 			//if no results are returned it throws error and alert window
 			if (results.length < 1) {
 				alert('No spots were found, please try again');
