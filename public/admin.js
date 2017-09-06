@@ -11,10 +11,13 @@ var getPassword = () => {
 //handles form submit
 $('#login-submit').on('click', (event) => {
 	event.preventDefault();
+	var user = getLogin();
+	var password = getPassword();
+	var base64encodedData = new Buffer(user + ':' + password).toString('base64');
 	$.ajax({
 		method: 'POST',
 		url:'https://damp-garden-35226.herokuapp.com/api/auth/login',
-		headers: {'Authorization': 'Basic ' + btoa(`${getLogin()}: ${getPassword()}`)},
+		headers: {'Authorization': 'Basic ' + base64encodedData},
 		success: res => console.log('Success!!')
 	});
 });
