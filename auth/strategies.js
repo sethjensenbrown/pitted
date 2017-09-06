@@ -37,7 +37,7 @@ basicStrategy = new BasicStrategy((username, password, callback) => {
 
 const jwtStrategy = new JwtStrategy({
 		secretOrKey: JWT_SECRET,
-		jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+		jwtFromRequest: ExtractJwt.fromUrlQueryParameter('jwt'),
 		algorithms: ['HS256']
 	},
 	(payload, done) => {

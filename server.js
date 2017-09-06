@@ -51,7 +51,7 @@ app.get('/admin', (req, res) => {
 });
 
 //GET request for /admin-menu displays admin menu page
-app.get('/admin-menu', (req, res) => {
+app.get('/admin-menu', passport.authenticate('jwt', {session: false}), (req, res) => {
 	res.sendFile(__dirname + '/public/admin-menu.html')
 });
 
