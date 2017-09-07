@@ -29,6 +29,18 @@ describe('Pitted dynamic API endpoints', function() {
 	const password = 'SPIRITBOMB!';
 	const firstName = 'Son';
 	const lastName = 'Goku';
+	const token = jwt.sign({
+			user: {
+				username,
+				firstName,
+				lastName
+			} 
+		}, JWT_SECRET, {
+			algorithm: 'HS256',
+			subject: username,
+			expiresIn: '1d'
+		});
+
 
 	before(function() {
 		return runServer(TEST_DATABASE_URL);
@@ -98,7 +110,7 @@ describe('Pitted dynamic API endpoints', function() {
 	describe('admin_id search endpoint', function() {
 		it('should return all spots in master-admin', function() {
 			return chai.request(app)
-				.get('/api/admin_id?admin_id=master-admin')
+				.get(`/api/admin_id?admin_id=master-admin&jwt=${token}`)
 				.then(function(_res) {
 					res = _res;
 					res.should.have.status(200);
@@ -170,7 +182,7 @@ describe('Pitted dynamic API endpoints', function() {
 				image_url: "http://landlockedsurfing.com/wp-content/uploads/2016/02/cropped-423718_311372172260334_189033544_n.jpg"
 			}
 			return chai.request(app)
-				.post('/api/add')
+				.post(`/api/add?jwt=${token}`)
 				.send(newSurfSpot)
 				.then(function(res) {
 					res.should.have.status(201);
@@ -220,7 +232,7 @@ describe('Pitted dynamic API endpoints', function() {
 			.then(function(spot) {
 				updateData._id = spot._id;
 				return chai.request(app)
-					.put(`/api/edit/${spot._id}`)
+					.put(`/api/edit?_id=${spot._id}&jwt=${token}`)
 					.send(updateData);
 			})
 			.then(function(res) {
@@ -248,7 +260,7 @@ describe('Pitted dynamic API endpoints', function() {
 				.then(function(spot) {
 					deleteID = spot._id
 					return chai.request(app)
-						.delete(`/api/delete/${deleteID}`)
+						.delete(`/api/delete?_id=${deleteID}&jwt=${token}`)
 				})
 				.then(function(res) {
 					res.should.have.status(204);
@@ -269,6 +281,17 @@ describe('Pitted static pages endpoints', function() {
 	const password = 'SPIRITBOMB!';
 	const firstName = 'Son';
 	const lastName = 'Goku';
+	const token = jwt.sign({
+		user: {
+			username,
+			firstName,
+			lastName
+		} 
+	}, JWT_SECRET, {
+		algorithm: 'HS256',
+		subject: username,
+		expiresIn: '1d'
+	});
 
 	before(function() {
 		return runServer(TEST_DATABASE_URL);
@@ -319,17 +342,6 @@ describe('Pitted static pages endpoints', function() {
 
 	describe('admin menu page', function() {
 		it('should get an html response', function() {
-			const token = jwt.sign({
-				user: {
-					username,
-					firstName,
-					lastName
-				} 
-			}, JWT_SECRET, {
-				algorithm: 'HS256',
-				subject: username,
-				expiresIn: '1d'
-			});
 			return chai.request(app)
 					.get(`/admin-menu?jwt=${token}`)
 					.then(function(res) {
@@ -342,7 +354,7 @@ describe('Pitted static pages endpoints', function() {
 	describe('editor page', function() {
 		it('should get an html response', function() {
 			return chai.request(app)
-					.get('/editor')
+					.get(`/editor?jwt=${token}`)
 					.then(function(res) {
 						res.should.have.status(200);
 						res.should.be.html;
@@ -353,7 +365,7 @@ describe('Pitted static pages endpoints', function() {
 	describe('add page', function() {
 		it('should get an html response', function() {
 			return chai.request(app)
-					.get('/add')
+					.get(`/add?jwt=${token}`)
 					.then(function(res) {
 						res.should.have.status(200);
 						res.should.be.html;
