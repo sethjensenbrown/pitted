@@ -6,7 +6,7 @@ const query = new URLSearchParams(window.location.search);
 //then loads them into form elements and initializes Google Map
 $.getJSON(`/api/spot_id?_id=${query.get('_id')}&jwt=${query.get('jwt')}`, res => {
 	//preload all fields with current values in database
-	const EDIT_SPOT = res;
+	const EDIT_SPOT = res.body;
 	var LATITUDE = parseFloat(EDIT_SPOT.location.coordinates[1]);
 	var LONGITUDE = parseFloat(EDIT_SPOT.location.coordinates[0]);
 	$('#editor-spot-name').val(EDIT_SPOT.name);
