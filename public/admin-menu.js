@@ -3,7 +3,7 @@
 const query = new URLSearchParams(window.location.search);
 
 //gets and displays all spot info for spots created by user that logs in
-$.getJSON(`/api/admin_id?admin_id=${query.get('user')}$jwt=${query.get('jwt')}`, res => {
+$.getJSON(`/api/admin_id?admin_id=${query.get('user')}&jwt=${query.get('jwt')}`, res => {
 	//stores all spot info for the user in SPOT_DATA
 	const SPOT_DATA = [];
 	res.map(spot => SPOT_DATA.push(spot));
