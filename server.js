@@ -50,18 +50,18 @@ app.get('/admin', (req, res) => {
 	res.sendFile(__dirname + '/public/admin.html')
 });
 
-//GET request for /admin-menu displays admin menu page
+//GET request for /admin-menu displays admin menu page PROTECTED
 app.get('/admin-menu', passport.authenticate('jwt', {session: false}), (req, res) => {
 	res.sendFile(__dirname + '/public/admin-menu.html')
 });
 
-//GET request for /editor displays spot editor page
-app.get('/editor', (req, res) => {
+//GET request for /editor displays spot editor page PROTECTED
+app.get('/editor', passport.authenticate('jwt', {session: false}), (req, res) => {
 	res.sendFile(__dirname + '/public/editor.html')
 });
 
-//GET request for /editor displays spot editor page
-app.get('/add', (req, res) => {
+//GET request for /editor displays spot editor page PROTECTED
+app.get('/add', passport.authenticate('jwt', {session: false}), (req, res) => {
 	res.sendFile(__dirname + '/public/add.html')
 });
 /***********************************************************/
@@ -74,19 +74,6 @@ app.get('/add', (req, res) => {
 app.get('/api/state/', (req, res) => {
 	SurfSpots
 		.find({'state': req.query.state})
-		.then((results) => res.json(results))
-		.catch((err) => {
-			console.error(err)
-			res.status(500).json({message: 'Internal server error'});
-		});
-});
-
-//GET request to this endpoint with query for state 
-//will return JSON response with all spots created by that admin
-//queries MUST include admin_id parameter
-app.get('/api/admin_id/', (req, res) => {
-	SurfSpots
-		.find({'admin_id': req.query.admin_id})
 		.then((results) => res.json(results))
 		.catch((err) => {
 			console.error(err)
@@ -119,8 +106,22 @@ app.get('/api/geo/', (req, res) => {
 		});
 });
 
+
+//GET request to this endpoint with query for state 
+//will return JSON response with all spots created by that admin
+//queries MUST include admin_id parameter
+app.get('/api/admin_id/', passport.authenticate('jwt', {session: false}), (req, res) => {
+	SurfSpots
+		.find({'admin_id': req.query.admin_id})
+		.then((results) => res.json(results))
+		.catch((err) => {
+			console.error(err)
+			res.status(500).json({message: 'Internal server error'});
+		});
+});
+
 //POST endpoint to add spots to the database
-app.post('/api/add', (req, res) => {
+app.post('/api/add/', passport.authenticate('jwt', {session: false}), (req, res) => {
 	const requiredFields = ['name', 'state', 'difficulty', 'image_url', 'location', 'admin_id'];
 	for (let i=0; i<requiredFields; i++) {
 		const field = requiredFields[i];
@@ -152,23 +153,23 @@ app.post('/api/add', (req, res) => {
 });
 
 //PUT endpoint for editing spot data
-app.put('/api/edit/:id', (req, res) => {
-	if (!(req.params.id === req.body._id)) {
+app.put('/api/edit/', passport.authenticate('jwt', {session: false}), (req, res) => {
+	if (!(req.query._id === req.body._id)) {
 		res.status(400).json({eror: 'Request path id must match request body id'});
 	}
 
 	SurfSpots
-		.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
+		.findByIdAndUpdate(req.query._id, {$set: req.body}, {new: true})
 		.then((updatedSpot) => {res.status(201).json(updatedSpot)})
 		.catch((err) => {res.status(500).json({message: 'Something went wrong'})});
 });
 
 //DELETE endpoint
-app.delete('/api/delete/:id', (req,res) => {
+app.delete('/api/delete/', passport.authenticate('jwt', {session: false}), (req,res) => {
 	SurfSpots
-		.findByIdAndRemove(req.params.id)
+		.findByIdAndRemove(req.query._id)
 		.then(() => {
-			console.log(`Deleted surf spot with _id: ${req.params.id}`);
+			console.log(`Deleted surf spot with _id: ${req.query._id}`);
 			res.status(204).end();
 		});
 }); 
