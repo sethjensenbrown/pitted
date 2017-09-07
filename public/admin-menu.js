@@ -39,8 +39,8 @@ $.getJSON(`/api/admin_id?admin_id=${query.get('user')}`, res => {
 $('#spots-container').on('click', '.js-spot-edit', (event) => {
 	//gets spot id stored in link element
 	var id = $(event.target).attr("value");
-	//API rquest goes here:
-	console.log(`Link to update spot with id: ${id}`);
+	//redirect to editor with spot id sent via the URL
+	window.location.href = `/editor?_id=${id}&jwt=${query.get('jwt')}`;
 });
 
 //event listener for DELETE THIS SPOT link
@@ -49,14 +49,18 @@ $('#spots-container').on('click', '.js-spot-delete', (event) => {
 	var id = $(event.target).attr("value");
 	//API rquest goes here:
 	if (confirm("Are you sure you want to delete this spot?")) {
-		console.log(`Link to delete spot with id: ${id}`);
+		$.ajax({
+			url: `/api/delete?_id=${id}&jwt=${query.get('jwt')}`,
+			method: 'DELETE',
+			success: window.location.reload(true)
+		})
 	}
 });
 
 //event listener for ADD A NEW SPOT link
 $('.js-spot-add').on('click', (event) => {
-	//API request goes here:
-	console.log(`Link to add spot`);
+	//redirect to add page
+	window.location.href = `/add?jwt=${query.get('jwt')}`;
 });
 
 
