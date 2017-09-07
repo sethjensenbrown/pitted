@@ -1,21 +1,20 @@
-var MOCK_SPOT = {
-		"_id": "11111111", 
-		"name": "Extreme River Wave", 
-		"admin_id": "river_surfer_1", 
-		"difficulty": "EXTREME!", 
-		"state": "CO", 
-		"location": {"type": "Point", "coordinates": [14.70368, 37.83460 ]}, 
-		"image_url": "http://riverbreak.com/wp-content/uploads/River-Drop-and-Flow-620x350.jpg"
-};
+//creates an object that holds the key value pairs from the URL query
+//should have values for _id and jwt 
+const query = new URLSearchParams(window.location.search);
+
+//gets spot matching the id passed in the url to preload info to be edited in form elements
+const EDIT_SPOT = $.getJSON(`/api/spot_id?_id=${query.get('_id')}&jwt=${query.get('jwt')}`, res => {
+	return res;
+});
 
 
 //preload all fields with current values in database
-var LATITUDE = parseFloat(MOCK_SPOT.location.coordinates[1]);
-var LONGITUDE = parseFloat(MOCK_SPOT.location.coordinates[0]);
-$('#editor-spot-name').val(MOCK_SPOT.name);
-$(`option[value='${MOCK_SPOT.state}'`).attr('selected', 'selected');
-$(`input[type='radio'][value='${MOCK_SPOT.difficulty}'`).attr('checked', 'checked');
-$('#editor-image-url').val(MOCK_SPOT.image_url);
+var LATITUDE = parseFloat(EDIT_SPOT.location.coordinates[1]);
+var LONGITUDE = parseFloat(EDIT_SPOT.location.coordinates[0]);
+$('#editor-spot-name').val(EDIT_SPOT.name);
+$(`option[value='${EDIT_SPOT.state}'`).attr('selected', 'selected');
+$(`input[type='radio'][value='${EDIT_SPOT.difficulty}'`).attr('checked', 'checked');
+$('#editor-image-url').val(EDIT_SPOT.image_url);
 
 //handles Google Map
 function initMap() {
@@ -83,19 +82,25 @@ var getAdminID = () => {
 $('#editor-submit').on('click', (event) => {
 	event.preventDefault();
 	if (confirm('Are you sure you want to submit?')) { 
-		console.log(`{
-			name: ${getSpotName()},
-			state: ${getState()},
-			location: {
-				type: "Point",
-				coordinates: [${LONGITUDE}, ${LATITUDE}]
+		var updatedSpot = `{
+			"_id": "${query.get('_id')}",
+			"name": "${getSpotName()}",
+			"state": "${getState()}",
+			"location": {
+				"type": "Point",
+				"coordinates": [${LONGITUDE}, ${LATITUDE}]
 			},
-			difficulty: ${getDifficulty()},
-			image_url: ${getImageURL()},
-			admin_id: ${getAdminID()}
-		}`);
+			"difficulty": "${getDifficulty()}",
+			"image_url": "${getImageURL()}",
+			"admin_id": "${getAdminID()}"
+		`};
+		$.ajax({
+			url: `/api/edit?_id=${query.get('_id')}&jwt=${query.get('jwt')}`,
+			method: 'PUT',
+			dataType: 'json',
+			data: updatedSpot  
+		});
 	}
-	//API request will go here!
 })
 
 

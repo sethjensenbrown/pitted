@@ -128,6 +128,27 @@ describe('Pitted dynamic API endpoints', function() {
 		})
 	})
 
+	describe('spot_id search endpoint', function() {
+		it('should return the spot matching spot_id', function() {
+			SurfSpots.findOne()
+			.then(res => {
+				const testId = res._id;
+				return chai.request(app)
+				.get(`/api/spot_id?_id=${testId}&jwt=${token}`)
+				.then(function(_res) {
+					res = _res;
+					res.should.have.status(200);
+					res.should.be.json;
+					res.body.should.be.a('object');
+					res.body.should.have.all.keys('__v', '_id', 'name', 'state', 'location', 'difficulty', 'image_url', 'admin_id');
+					res.body.location.should.have.all.keys('type', 'coordinates');
+					res.body.location.type.should.equal('Point');
+					res.body._id.should.equal(id);
+				});
+			});
+		})
+	})
+
 	describe('zip code search endpoint', function() {
 		it('should find spots near Bethany Beach, MI', function() {
 			return chai.request(app)

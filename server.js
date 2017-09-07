@@ -107,12 +107,25 @@ app.get('/api/geo/', (req, res) => {
 });
 
 
-//GET request to this endpoint with query for state 
+//GET request to this endpoint with query for admin_id 
 //will return JSON response with all spots created by that admin
 //queries MUST include admin_id parameter
 app.get('/api/admin_id/', passport.authenticate('jwt', {session: false}), (req, res) => {
 	SurfSpots
 		.find({'admin_id': req.query.admin_id})
+		.then((results) => res.json(results))
+		.catch((err) => {
+			console.error(err)
+			res.status(500).json({message: 'Internal server error'});
+		});
+});
+
+//GET request to this endpoint with query for spot_id 
+//will return JSON response with that spot
+//queries MUST include _id parameter
+app.get('/api/spot_id/', passport.authenticate('jwt', {session: false}), (req, res) => {
+	SurfSpots
+		.find({'_id': req.query._id})
 		.then((results) => res.json(results))
 		.catch((err) => {
 			console.error(err)
