@@ -93,15 +93,16 @@ $('#editor-submit').on('click', (event) => {
 			"difficulty": "${getDifficulty()}",
 			"image_url": "${getImageURL()}",
 			"admin_id": "${getAdminID()}"
-		`};
+		}`;
 		$.ajax({
 			url: `/api/edit?_id=${query.get('_id')}&jwt=${query.get('jwt')}`,
 			method: 'PUT',
 			dataType: 'json',
-			data: updatedSpot  
+			data: updatedSpot,
+			success: window.location.reload(true)
 		});
-	}
-})
+	};
+});
 
 
 
