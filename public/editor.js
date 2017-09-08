@@ -100,6 +100,7 @@ $('#editor-submit').on('click', (event) => {
 		$.ajax({
 			url: `/api/edit?_id=${query.get('_id')}&jwt=${query.get('jwt')}`,
 			method: 'PUT',
+			contentType: 'application/json',
 			dataType: 'json',
 			data: updatedSpot,
 			success: window.location.reload(true)
