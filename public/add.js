@@ -1,3 +1,7 @@
+//creates an object that holds the key value pairs from the URL query
+//should have values for user and jwt 
+const query = new URLSearchParams(window.location.search);
+
 var LATITUDE = 37.09024;
 var LONGITUDE = -95.712891;
 
@@ -63,29 +67,29 @@ var getImageURL = () => {
 	return $('#editor-image-url').val();
 }
 
-//no verification because adminID is required to add spot
-var getAdminID = () => {
-	//will replace with function to grab admin id from JWT
-	return 'master-admin';
-}
-
 //updates spot on form submit
-//change to $('#editor-form').submit when adding API
 $('#editor-submit').on('click', (event) => {
 	event.preventDefault();
 	if (confirm('Are you sure you want to submit?')) { 
-		console.log(`db.surfspots.insertOne({name: "${getSpotName()}", state: "${getState()}", location: {type: "Point", coordinates: [${LONGITUDE}, ${LATITUDE}]}, difficulty: "${getDifficulty()}", image_url: "${getImageURL()}", admin_id: "${getAdminID()}"})`);
-		console.log(`{
-			name: ${getSpotName()},
-			state: ${getState()},
-			location: {
-				type: "Point",
-				coordinates: [${LONGITUDE}, ${LATITUDE}]
+		var newSpot = `{
+			"name": "${getSpotName()}",
+			"state": "${getState()}",
+			"location": {
+				"type": "Point",
+				"coordinates": [${LONGITUDE}, ${LATITUDE}]
 			},
-			difficulty: ${getDifficulty()},
-			image_url: ${getImageURL()},
-			admin_id: ${getAdminID()}
-		}`);
+			"difficulty": "${getDifficulty()}",
+			"image_url": "${getImageURL()}",
+			"admin_id": "${query.get('user')}"
+		}`;
+		//PUT request to server to update the spot
+		$.ajax({
+			url: `/api/add?jwt=${query.get('jwt')}`,
+			method: 'POST',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: newSpot,
+			success: window.location.href = `/admin-menu?user=${query.get('user')}&jwt=${query.get('jwt')}`
+		});
 	}
-	//API request will go here!
 })

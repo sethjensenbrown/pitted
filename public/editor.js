@@ -74,16 +74,11 @@ var getImageURL = () => {
 	return $('#editor-image-url').val();
 }
 
-//no verification because adminID is required to add spot
-var getAdminID = () => {
-	//will replace with function to grab admin id from JWT
-	return 'master-admin';
-}
-
 //updates spot on form submit
-//change to $('#editor-form').submit when adding API
 $('#editor-submit').on('click', (event) => {
 	event.preventDefault();
+	//cretes string representation of JSON data to sumbit for the update
+	//grabs all form values at time of submit
 	if (confirm('Are you sure you want to submit?')) { 
 		var updatedSpot = `{
 			"_id": "${query.get('_id')}",
@@ -94,9 +89,9 @@ $('#editor-submit').on('click', (event) => {
 				"coordinates": [${LONGITUDE}, ${LATITUDE}]
 			},
 			"difficulty": "${getDifficulty()}",
-			"image_url": "${getImageURL()}",
-			"admin_id": "${getAdminID()}"
+			"image_url": "${getImageURL()}"
 		}`;
+		//PUT request to server to update the spot
 		$.ajax({
 			url: `/api/edit?_id=${query.get('_id')}&jwt=${query.get('jwt')}`,
 			method: 'PUT',
