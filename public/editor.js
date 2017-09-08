@@ -15,35 +15,37 @@ $.getJSON(`/api/spot_id?_id=${query.get('_id')}&jwt=${query.get('jwt')}`, res =>
 	$(`option[value='${EDIT_SPOT.state}'`).attr('selected', 'selected');
 	$(`input[type='radio'][value='${EDIT_SPOT.difficulty}'`).attr('checked', 'checked');
 	$('#editor-image-url').val(EDIT_SPOT.image_url);
-
-	//handles Google Map
-	function initMap() {
-		var map;
-	    var mapOptions = {
-	        mapTypeId: 'roadmap',
-	        center: {lat: LATITUDE, lng: LONGITUDE},
-	  		zoom: 3
-	    };
-	                    
-	    //displays a map on the page with marker in center
-	    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-	    map.setTilt(45);
-	    marker = new google.maps.Marker({position: {lat: LATITUDE, lng: LONGITUDE}, map: map});
-
-	    //on click, displays new marker at click and centers map on marker
-	    //also updates LATITUDE and LONGITUDE globals to click location
-	    google.maps.event.addListener(map, 'click', function(event) {
-	    	//resets marker so there's ever only one marker on map
-	    	LATITUDE = event.latLng.lat();
-	    	LONGITUDE = event.latLng.lng();
-	    	if (marker != null) {
-	    		marker.setMap(null);
-	    	}
-			marker = new google.maps.Marker({position: event.latLng, map: map});
-			map.panTo(event.latLng);
-		});
-	};
+	initMap();
+	
 });
+
+//handles Google Map
+var initMap = () => {
+	var map;
+    var mapOptions = {
+        mapTypeId: 'roadmap',
+        center: {lat: LATITUDE, lng: LONGITUDE},
+  		zoom: 3
+    };
+                    
+    //displays a map on the page with marker in center
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    map.setTilt(45);
+    marker = new google.maps.Marker({position: {lat: LATITUDE, lng: LONGITUDE}, map: map});
+
+    //on click, displays new marker at click and centers map on marker
+    //also updates LATITUDE and LONGITUDE globals to click location
+    google.maps.event.addListener(map, 'click', function(event) {
+    	//resets marker so there's ever only one marker on map
+    	LATITUDE = event.latLng.lat();
+    	LONGITUDE = event.latLng.lng();
+    	if (marker != null) {
+    		marker.setMap(null);
+    	}
+		marker = new google.maps.Marker({position: event.latLng, map: map});
+		map.panTo(event.latLng);
+	});
+};
 
 //requires user to enter a spot name
 var getSpotName = () => {
