@@ -98,7 +98,7 @@ $('#editor-submit').on('click', (event) => {
 			contentType: 'application/json',
 			dataType: 'json',
 			data: updatedSpot,
-			success: window.location.reload(true)
+			success: window.location.href = `/admin-menu?user=${query.get('user')}&jwt=${query.get('jwt')}`
 		});
 	};
 });
