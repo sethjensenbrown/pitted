@@ -1,8 +1,8 @@
 //creates an object that holds the key value pairs from the URL query
 //should have values for _id and jwt 
 const query = new URLSearchParams(window.location.search);
-const LATITUDE;
-const LONGITUDE;
+var LATITUDE = 37.09024;
+var LONGITUDE = -95.712891;
 
 //gets spot matching the id passed in the url to preload info to be edited in form elements
 //then loads them into form elements and initializes Google Map
