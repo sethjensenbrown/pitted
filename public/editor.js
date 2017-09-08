@@ -1,19 +1,20 @@
 //creates an object that holds the key value pairs from the URL query
 //should have values for _id and jwt 
 const query = new URLSearchParams(window.location.search);
+const LATITUDE;
+const LONGITUDE;
 
 //gets spot matching the id passed in the url to preload info to be edited in form elements
 //then loads them into form elements and initializes Google Map
 $.getJSON(`/api/spot_id?_id=${query.get('_id')}&jwt=${query.get('jwt')}`, res => {
 	//preload all fields with current values in database
-	console.log(`res: ${res}`);
-	console.log(`res.body: ${res.body}`);
-	var LATITUDE = parseFloat(res.body.location.coordinates[1]);
-	var LONGITUDE = parseFloat(res.body.location.coordinates[0]);
-	$('#editor-spot-name').val(res.body.name);
-	$(`option[value='${res.body.state}'`).attr('selected', 'selected');
-	$(`input[type='radio'][value='${res.body.difficulty}'`).attr('checked', 'checked');
-	$('#editor-image-url').val(res.body.image_url);
+	EDIT_SPOT = res[0];
+	LATITUDE = parseFloat(EDIT_SPOT.location.coordinates[1]);
+	LONGITUDE = parseFloat(EDIT_SPOT.location.coordinates[0]);
+	$('#editor-spot-name').val(EDIT_SPOT.name);
+	$(`option[value='${EDIT_SPOT.state}'`).attr('selected', 'selected');
+	$(`input[type='radio'][value='${EDIT_SPOT.difficulty}'`).attr('checked', 'checked');
+	$('#editor-image-url').val(EDIT_SPOT.image_url);
 
 	//handles Google Map
 	function initMap() {
