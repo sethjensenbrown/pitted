@@ -74,6 +74,7 @@ height: 400px;
 }
 #map-canvas {
   height:100%;
+margin-top: 5px;
 }
 body {
   margin-bottom: 100px
@@ -84,4 +85,8 @@ body {
 
 .margin-15 {
   margin-left: 15px;
+}
+.nav-element {
+  font-size: 16px;
+font-weight: 400;
 }

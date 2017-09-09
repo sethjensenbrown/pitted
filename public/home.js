@@ -156,4 +156,10 @@ $('#search-button').on('click', (event) => {
 			}
 		});
 	}
+});
+
+//event handler for Go Back and Search Again Link click
+$('#search-again').on('click', (event) => {
+	event.preventDefault();
+	window.location.reload(true);
 })
