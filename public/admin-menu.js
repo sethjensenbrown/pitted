@@ -1,9 +1,11 @@
 //creates an object that holds the key value pairs from the URL query
 //should have values for user and jwt 
 const query = new URLSearchParams(window.location.search);
+const ADMIN_ID = query.get('user');
+const JWT = query.get('jwt');
 
 //gets and displays all spot info for spots created by user that logs in
-$.getJSON(`/api/admin_id?admin_id=${query.get('user')}&jwt=${query.get('jwt')}`, res => {
+$.getJSON(`/api/admin_id?admin_id=${ADMIN_ID}&jwt=${JWT}`, res => {
 	//stores all spot info for the user in SPOT_DATA
 	const SPOT_DATA = [];
 	res.map(spot => SPOT_DATA.push(spot));
@@ -40,7 +42,7 @@ $('#spots-container').on('click', '.js-spot-edit', (event) => {
 	//gets spot id stored in link element
 	var id = $(event.target).attr("value");
 	//redirect to editor with spot id sent via the URL
-	window.location.href = `/editor?_id=${id}&jwt=${query.get('jwt')}`;
+	window.location.href = `/editor?_id=${id}&user=${ADMIN_ID}&jwt=${JWT}`;
 });
 
 //event listener for DELETE THIS SPOT link
@@ -50,7 +52,7 @@ $('#spots-container').on('click', '.js-spot-delete', (event) => {
 	//API rquest goes here:
 	if (confirm("Are you sure you want to delete this spot?")) {
 		$.ajax({
-			url: `/api/delete?_id=${id}&jwt=${query.get('jwt')}`,
+			url: `/api/delete?_id=${id}&jwt=${JWT}`,
 			method: 'DELETE',
 			success: window.location.reload(true)
 		})
@@ -60,7 +62,7 @@ $('#spots-container').on('click', '.js-spot-delete', (event) => {
 //event listener for ADD A NEW SPOT link
 $('.js-spot-add').on('click', (event) => {
 	//redirect to add page
-	window.location.href = `/add?user=${query.get('user')}&jwt=${query.get('jwt')}`;
+	window.location.href = `/add?user=${ADMIN_ID}&jwt=${JWT}`;
 });
 
 

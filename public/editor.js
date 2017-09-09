@@ -1,12 +1,15 @@
 //creates an object that holds the key value pairs from the URL query
 //should have values for _id and jwt 
 const query = new URLSearchParams(window.location.search);
+const ADMIN_ID = query.get('user');
+const JWT = query.get('jwt');
+const SPOT_ID = query.get('_id');
 var LATITUDE = 37.09024;
 var LONGITUDE = -95.712891;
 
 //gets spot matching the id passed in the url to preload info to be edited in form elements
 //then loads them into form elements and initializes Google Map
-$.getJSON(`/api/spot_id?_id=${query.get('_id')}&jwt=${query.get('jwt')}`, res => {
+$.getJSON(`/api/spot_id?_id=${SPOT_ID}&jwt=${JWT}`, res => {
 	//preload all fields with current values in database
 	EDIT_SPOT = res[0];
 	LATITUDE = parseFloat(EDIT_SPOT.location.coordinates[1]);
@@ -93,12 +96,12 @@ $('#editor-submit').on('click', (event) => {
 		}`;
 		//PUT request to server to update the spot
 		$.ajax({
-			url: `/api/edit?_id=${query.get('_id')}&jwt=${query.get('jwt')}`,
+			url: `/api/edit?_id=${SPOT_ID}&jwt=${JWT}`,
 			method: 'PUT',
 			contentType: 'application/json',
 			dataType: 'json',
 			data: updatedSpot,
-			success: window.location.href = `/admin-menu?user=${query.get('user')}&jwt=${query.get('jwt')}`
+			success: window.location.href = `/admin-menu?user=${ADMIN_ID}&jwt=${JWT}`
 		});
 	};
 });
@@ -106,6 +109,6 @@ $('#editor-submit').on('click', (event) => {
 //event handler for Go Back to Admin Menu Link click
 $('#admin-back').on('click', (event) => {
 	event.preventDefault();
-	window.location.href= `/admin-menu?user=${query.get('user')}&jwt=${query.get('jwt')}`;
+	window.location.href= `/admin-menu?user=${ADMIN_ID}&jwt=${JWT}`;
 })
 
