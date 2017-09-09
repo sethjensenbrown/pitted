@@ -1,7 +1,8 @@
 //creates an object that holds the key value pairs from the URL query
 //should have values for user and jwt 
 const query = new URLSearchParams(window.location.search);
-
+const ADMIN_ID = query.get('user');
+const JWT = query.get('jwt');
 var LATITUDE = 37.09024;
 var LONGITUDE = -95.712891;
 
@@ -80,16 +81,16 @@ $('#editor-submit').on('click', (event) => {
 			},
 			"difficulty": "${getDifficulty()}",
 			"image_url": "${getImageURL()}",
-			"admin_id": "${query.get('user')}"
+			"admin_id": "${ADMIN_ID}"
 		}`;
 		//PUT request to server to update the spot
 		$.ajax({
-			url: `/api/add?jwt=${query.get('jwt')}`,
+			url: `/api/add?jwt=${JWT}`,
 			method: 'POST',
 			contentType: 'application/json',
 			dataType: 'json',
 			data: newSpot,
-			success: window.location.href = `/admin-menu?user=${query.get('user')}&jwt=${query.get('jwt')}`
+			success: window.location.href = `/admin-menu?user=${ADMIN_ID}&jwt=${JWT}`
 		});
 	}
 });
@@ -97,5 +98,5 @@ $('#editor-submit').on('click', (event) => {
 //event handler for Go Back to Admin Menu Link click
 $('#admin-back').on('click', (event) => {
 	event.preventDefault();
-	window.location.href= `/admin-menu?user=${query.get('user')}&jwt=${query.get('jwt')}`;
+	window.location.href= `/admin-menu?user=${ADMIN_ID}&jwt=${JWT}`;
 })
