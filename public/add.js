@@ -95,7 +95,7 @@ $('#editor-submit').on('click', (event) => {
 });
 
 //event handler for Go Back to Admin Menu Link click
-$('#search-again').on('click', (event) => {
+$('#admin-back').on('click', (event) => {
 	event.preventDefault();
 	window.location.href= `/admin-menu?user=${query.get('user')}&jwt=${query.get('jwt')}`;
 })
