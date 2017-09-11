@@ -7,13 +7,8 @@ const SPOT_ID = query.get('_id');
 var LATITUDE = 37.09024;
 var LONGITUDE = -95.712891;
 
-//determines whether or not to prefill forms by presence of SPOT_ID in URL query
-if(SPOT_ID) {
-	prefillForms();
-}
-else {
-	initMap();
-}
+//completes action once page is loaded
+$(prefillForms(););
 
 //gets spot matching the id passed in the url to preload info to be edited in form elements
 //then loads them into form elements and initializes Google Map
