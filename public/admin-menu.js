@@ -62,7 +62,7 @@ $('#spots-container').on('click', '.js-spot-delete', (event) => {
 //event listener for ADD A NEW SPOT link
 $('.js-spot-add').on('click', (event) => {
 	//redirect to add page
-	window.location.href = `/add?user=${ADMIN_ID}&jwt=${JWT}`;
+	window.location.href = `/editor?user=${ADMIN_ID}&jwt=${JWT}`;
 });
 
 

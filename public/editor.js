@@ -90,32 +90,64 @@ var getImageURL = () => {
 	return $('#editor-image-url').val();
 }
 
+var editSpot = () => {
+	var updatedSpot = `{
+		"_id": "${query.get('_id')}",
+		"name": "${getSpotName()}",
+		"state": "${getState()}",
+		"location": {
+			"type": "Point",
+			"coordinates": [${LONGITUDE}, ${LATITUDE}]
+		},
+		"difficulty": "${getDifficulty()}",
+		"image_url": "${getImageURL()}"
+	}`;
+	//PUT request to server to update the spot
+	$.ajax({
+		url: `/api/edit?_id=${SPOT_ID}&jwt=${JWT}`,
+		method: 'PUT',
+		contentType: 'application/json',
+		dataType: 'json',
+		data: updatedSpot,
+		success: window.location.href = `/admin-menu?user=${ADMIN_ID}&jwt=${JWT}`
+	});
+}
+
+var addSpot = () => {
+	var newSpot = `{
+		"name": "${getSpotName()}",
+		"state": "${getState()}",
+		"location": {
+			"type": "Point",
+			"coordinates": [${LONGITUDE}, ${LATITUDE}]
+		},
+		"difficulty": "${getDifficulty()}",
+		"image_url": "${getImageURL()}",
+		"admin_id": "${ADMIN_ID}"
+	}`;
+	//PUT request to server to update the spot
+	$.ajax({
+		url: `/api/add?jwt=${JWT}`,
+		method: 'POST',
+		contentType: 'application/json',
+		dataType: 'json',
+		data: newSpot,
+		success: window.location.href = `/admin-menu?user=${ADMIN_ID}&jwt=${JWT}`
+	});
+}
+
 //updates spot on form submit
 $('#editor-submit').on('click', (event) => {
 	event.preventDefault();
 	//cretes string representation of JSON data to sumbit for the update
 	//grabs all form values at time of submit
 	if (confirm('Are you sure you want to submit?')) { 
-		var updatedSpot = `{
-			"_id": "${query.get('_id')}",
-			"name": "${getSpotName()}",
-			"state": "${getState()}",
-			"location": {
-				"type": "Point",
-				"coordinates": [${LONGITUDE}, ${LATITUDE}]
-			},
-			"difficulty": "${getDifficulty()}",
-			"image_url": "${getImageURL()}"
-		}`;
-		//PUT request to server to update the spot
-		$.ajax({
-			url: `/api/edit?_id=${SPOT_ID}&jwt=${JWT}`,
-			method: 'PUT',
-			contentType: 'application/json',
-			dataType: 'json',
-			data: updatedSpot,
-			success: window.location.href = `/admin-menu?user=${ADMIN_ID}&jwt=${JWT}`
-		});
+		if (SPOT_ID) {
+			editSpot();
+		}
+		else {
+			addSpot();
+		}
 	};
 });
 
