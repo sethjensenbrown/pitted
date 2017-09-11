@@ -45,7 +45,7 @@ var prefillForms = () => {
 		LONGITUDE = parseFloat(EDIT_SPOT.location.coordinates[0]);
 		$('#editor-spot-name').val(EDIT_SPOT.name);
 		$(`option[value='${EDIT_SPOT.state}']`).attr('selected', 'selected');
-		$(`input[type='radio'][value='${EDIT_SPOT.difficulty}'`).attr('checked', 'checked');
+		$(`input[type='radio'][value='${EDIT_SPOT.difficulty}']`).attr('checked', 'checked');
 		$('#editor-image-url').val(EDIT_SPOT.image_url);
 		initMap();
 	});
