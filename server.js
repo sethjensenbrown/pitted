@@ -59,11 +59,6 @@ app.get('/admin-menu', passport.authenticate('jwt', {session: false}), (req, res
 app.get('/editor', passport.authenticate('jwt', {session: false}), (req, res) => {
 	res.sendFile(__dirname + '/public/editor.html')
 });
-
-//GET request for /editor displays spot editor page PROTECTED
-app.get('/add', passport.authenticate('jwt', {session: false}), (req, res) => {
-	res.sendFile(__dirname + '/public/add.html')
-});
 /***********************************************************/
 
 //DYNAMIC API ENDPOINTS

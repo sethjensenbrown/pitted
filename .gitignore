@@ -1,4 +1,6 @@
 node_modules
 public/_pgbackup
+public/pinegrow.json
+ignore/
 .DS_Store
 .env
