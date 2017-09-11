@@ -1,5 +1,5 @@
 //creates an object that holds the key value pairs from the URL query
-//should have values for _id and jwt 
+//should have values for _id, user, and jwt 
 const query = new URLSearchParams(window.location.search);
 const ADMIN_ID = query.get('user');
 const JWT = query.get('jwt');
@@ -7,20 +7,29 @@ const SPOT_ID = query.get('_id');
 var LATITUDE = 37.09024;
 var LONGITUDE = -95.712891;
 
+//determines whether or not to prefill forms by presence of SPOT_ID in URL query
+if(SPOT_ID) {
+	prefillForms();
+}
+else {
+	initMap();
+}
+
 //gets spot matching the id passed in the url to preload info to be edited in form elements
 //then loads them into form elements and initializes Google Map
-$.getJSON(`/api/spot_id?_id=${SPOT_ID}&jwt=${JWT}`, res => {
-	//preload all fields with current values in database
-	EDIT_SPOT = res[0];
-	LATITUDE = parseFloat(EDIT_SPOT.location.coordinates[1]);
-	LONGITUDE = parseFloat(EDIT_SPOT.location.coordinates[0]);
-	$('#editor-spot-name').val(EDIT_SPOT.name);
-	$(`option[value='${EDIT_SPOT.state}'`).attr('selected', 'selected');
-	$(`input[type='radio'][value='${EDIT_SPOT.difficulty}'`).attr('checked', 'checked');
-	$('#editor-image-url').val(EDIT_SPOT.image_url);
-	initMap();
-	
-});
+var prefillForms = () => {
+	$.getJSON(`/api/spot_id?_id=${SPOT_ID}&jwt=${JWT}`, res => {
+		//preload all fields with current values in database
+		EDIT_SPOT = res[0];
+		LATITUDE = parseFloat(EDIT_SPOT.location.coordinates[1]);
+		LONGITUDE = parseFloat(EDIT_SPOT.location.coordinates[0]);
+		$('#editor-spot-name').val(EDIT_SPOT.name);
+		$(`option[value='${EDIT_SPOT.state}'`).attr('selected', 'selected');
+		$(`input[type='radio'][value='${EDIT_SPOT.difficulty}'`).attr('checked', 'checked');
+		$('#editor-image-url').val(EDIT_SPOT.image_url);
+		initMap();
+	});
+};
 
 //handles Google Map
 var initMap = () => {
