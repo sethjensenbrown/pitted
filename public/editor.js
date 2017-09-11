@@ -52,7 +52,16 @@ var prefillForms = () => {
 };
 
 //completes action once page is loaded
-$(prefillForms());
+$(
+	//logic checks to see if SPOT_ID is present in URL to preload forms
+	if (SPOT_ID) {
+		prefillForms();
+	}
+	else {
+		initMap();
+	}
+);
+
 
 //requires user to enter a spot name
 var getSpotName = () => {
