@@ -27,7 +27,7 @@ passport.use(basicStrategy);
 passport.use(jwtStrategy);
 
 // CORS
-app.use(function (req, res, next) {
+/*app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
@@ -35,7 +35,7 @@ app.use(function (req, res, next) {
     return res.send(204);
   }
   next();
-});
+});*/
 /***********************************************************/
 
 //STATIC PAGES ENDPOINTS
@@ -101,7 +101,7 @@ app.get('/api/geo/', (req, res) => {
 			})
 		.then((results) => res.json(results))
 		.catch((err) => {
-			//console.error(err)
+			console.error(err)
 			res.status(500).json({message: 'Internal server error'});
 		});
 });
@@ -160,8 +160,8 @@ app.post('/api/add/', passport.authenticate('jwt', {session: false}), (req, res)
 			res.status(201).json(newSpot);
 		})
 		.catch((err) => {
-			console.error(err);
-			res.status(500).json({error: 'Something went wrong'});
+			console.error(err)
+			res.status(500).json({message: 'Internal server error'});
 		});
 });
 
@@ -174,7 +174,10 @@ app.put('/api/edit/', passport.authenticate('jwt', {session: false}), (req, res)
 	SurfSpots
 		.findByIdAndUpdate(req.query._id, {$set: req.body}, {new: true})
 		.then((updatedSpot) => {res.status(201).json(updatedSpot)})
-		.catch((err) => {res.status(500).json({message: 'Something went wrong'})});
+		.catch((err) => {
+			console.error(err)
+			res.status(500).json({message: 'Internal server error'});
+		});
 });
 
 //DELETE endpoint
@@ -184,6 +187,10 @@ app.delete('/api/delete/', passport.authenticate('jwt', {session: false}), (req,
 		.then(() => {
 			console.log(`Deleted surf spot with _id: ${req.query._id}`);
 			res.status(204).end();
+		})
+		.catch((err) => {
+			console.error(err)
+			res.status(500).json({message: 'Internal server error'});
 		});
 }); 
 /************************************************************/
