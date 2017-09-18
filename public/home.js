@@ -39,8 +39,14 @@ var makeTemplateArray = (data) => {
 
 //adds each spot element to DOM
 var addHTML = (templateArray) => {
-	templateArray.forEach((template) => {
-		$('#spots-container').append(template.html());
+	templateArray.forEach((template, i) => {
+		if (i <= (this.length + 0.5)) {
+			$('#spots-container-a').append(template.html());
+		}
+		else {
+			$('#spots-container-b').append(template.html());
+		}
+
 	});
 }
 
