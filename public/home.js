@@ -40,7 +40,7 @@ var makeTemplateArray = (data) => {
 //adds each spot element to DOM
 var addHTML = (templateArray) => {
 	templateArray.forEach((template, i) => {
-		if (i <= (this.length + 0.5)) {
+		if (i < (this.length/2)) {
 			$('#spots-container-a').append(template.html());
 		}
 		else {
