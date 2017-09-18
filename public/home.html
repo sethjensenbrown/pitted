@@ -21,14 +21,15 @@
     </head>
     <body>
         <!--Title-->
-        <div class="container">
-            <div>
+        <div id="title-bar" class="container">
+            <div id="logo">
                 <h1 class="main-title">Pitted</h1>
+                <img id="wave" src="./wave.jpg" style="width: 275px;height: 50px" />
                 <h2 class="sub-title">Find your wave</h2>
             </div>
         </div>
         <!--Search Page-->
-        <div class="container" id="search-container">
+        <div class="container hidden" id="search-container">
             <div class="form-group search-form"> 
                 <label for="search-state" class="form-label">Search By State:</label>
                 <br>
@@ -103,7 +104,7 @@
             </div>
         </div>
         <!--Results Page-->
-        <div class="container hidden" id="results-container">
+        <div class="container" id="results-container">
             <a id="search-again" class="nav-element">Go Back to Seach Again</a>
             <div id="map-wrapper">
                 <div id="map-canvas"></div>
@@ -111,7 +112,7 @@
             <hr>
             <div class="container" id="spots-container">
                 <div class="row hidden" id="spot-template">
-                    <div class="col-xs-12">
+                    <div class="col-sm-12">
                         <h3 class="js-template-name"></h3>
                         <img src="" class="spot-image js-template-img" /> 
                         <p><b>Community Leader: </b><span class="js-template-username"></span></p>

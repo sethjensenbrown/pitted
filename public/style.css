@@ -2,58 +2,87 @@
   display: none;
 }
 .main-title {
-  margin: 40px 40px 5px;
-font-size: 75px;
-letter-spacing: 10px
-}.sub-title{  margin-left: 40px;margin-bottom: 40px;margin-right: 40px;font-size: 20px;letter-spacing: 9px}.search-input {  width: 200px;height: 30px
+  margin: 0px;
+  font-size: 75px;
+  letter-spacing: 10px;
+  width: 275px
+}
+.sub-title{ 
+  font-size: 20px;
+  letter-spacing: 9px;
+  margin: 0px;
+  width: 275px
+}
+.search-input {  
+  width: 200px; 
+  height: 30px
+}
+
+/* For Bigger Displays */
+@media (min-width:650px) {
+
+
+}
+
+/* For Smaller Displays */
+@media (max-width:649px) {
+
+
+}
+
+#map-wrapper {
+  width: 100%;
+  height: 300px
+}
+.search-form {
+  margin: auto;
+  text-align: center;
+  width: 300px
 }
 .search-button {
   height: 30px;
-width: 50px;
-margin: 10px
+  width: 50px;
+  margin: 10px
 }
-.search-form {
-  width: 300px
-}
+
 .search-radio {
   text-align: left
-}.search-radio-element {
 }
 .search-state {
-  width: 370px;
-height: 30px
+  width: 100%;
+  height: 30px
 }
 .radio-element-label {
   font-size: 18px;
-font-weight: normal
+  font-weight: normal
 }
 .input-form {
-  width: 370px;
-height: 30px;
-margin-top: 0px
+  width: 100%;
+  height: 30px;
+  margin-top: 0px
 }
 .submit-button {
   width: 100px;
-height: 30px;
-margin-top: 15px
+  height: 30px;
+  margin-top: 15px
 }
 .login-form {
   width: 300px;
-margin-left: 50px
+  margin-left: 50px
 }
 .spot-image {
   width: 300px;
-margin-top: 15px;
-margin-bottom: 15px
+  margin-top: 15px;
+  margin-bottom: 15px
 }
 .map-container {
   width: 90%;
-height: 500px;
-font-size: 100px
+  height: 500px;
+  font-size: 100px
 }
 .form-label {
   font-size: 20px;
-margin-top: 15px
+  margin-top: 15px
 }
 #editor-difficulty {
   margin-top: 15px
@@ -64,20 +93,14 @@ margin-top: 15px
 .spot-add {
   margin-left: 15px;
 }
-@media (max-width:479px) {
-#map-wrapper {
-  width: 100%;
-height: 300px
-}
-}
 #results-map-wrapper{
   width: 700px;
-height: 400px;
+  height: 400px;
 }
 #map-canvas {
   height:100%;
-margin-top: 5px;
-width: 100%;
+  margin-top: 5px;
+  width: 100%;
 }
 body {
   margin-bottom: 100px
@@ -91,11 +114,22 @@ body {
 }
 .nav-element {
   font-size: 16px;
-font-weight: 400;
+  font-weight: 400;
+color: #3468c7;
 }
-@media (min-width:480px) {
-#map-wrapper {
-  width: 50%;
-height: 300px;
+#wave {
+  margin: 0px;
 }
+#logo {
+  text-align: left;
+  width: 300px;
+  margin: auto;
+  padding-left: 12.5px;
+  padding-right: 12.5px;
+}
+#title-bar {
+  margin-bottom: 40px;
+}hr {
+    border: 0;
+    border-top: 2px solid #3468c7
 }
