@@ -169,3 +169,9 @@ $('#search-again').on('click', (event) => {
 	event.preventDefault();
 	window.location.reload(true);
 })
+
+//reloads page when logo is clicked
+$('#logo').on('click', (event) => {
+	event.preventDefault();
+	window.location.reload(true);
+})
