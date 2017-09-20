@@ -168,3 +168,7 @@ font-size: 20px;
 text-decoration: underline;
 letter-spacing: 3px
 }
+#editor-form {
+  width: 300px;
+margin: auto
+}
