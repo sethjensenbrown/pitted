@@ -1,14 +1,6 @@
 *{
 	font-family: 'Rock Salt'   
 }
-/*.background{
-  background-image: url('jeremy-bishop-331840.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-text-align: center;
-position: relative;
-}*/
 .hidden {
   display: none;
 }
@@ -36,31 +28,21 @@ height: 70px
 /* For Bigger Displays */
 @media (min-width:750px) {
 
-/*.whiteout {
-  background-color: #fff;
-  position: fixed;
-  top: 0px;
-  bottom: 0px;
-  width: 700px;
-  z-index: -1;
-  left: 50%;
-  margin-left: -350px
-}*/
+
 
 }
 
 /* For Smaller Displays */
 @media (max-width:749px) {
 
-.spot-container {
-  margin: auto;
-}
+  .spot-container {
+   margin: auto;
+  }
 
 }
 
 #map-wrapper {
-  width: 100%;
-  max-width: 650px;
+  width: 90%;
   height: 300px
 }
 .search-form {
@@ -107,7 +89,8 @@ border-radius: 6px
   margin-left: 50px
 }
 .spot-image {
-  width: 300px;
+  width: 33%;
+  min-width: 300px;
   margin-top: 15px;
   margin-bottom: 15px
 }
@@ -176,13 +159,3 @@ margin-top: 20px;
   width: 100%;
 height: 100%
 }
-/*.whiteout2 {
-  background-color: #fff;
-z-index: -1;
-position: fixed;
-top: 0;
-bottom: 0;
-margin-left: 50%;
-left: -200px;
-width: 400px
-}*/
