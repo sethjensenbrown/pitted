@@ -71,5 +71,9 @@ $('.js-spot-add').on('click', (event) => {
 	window.location.href = `/editor?user=${ADMIN_ID}&jwt=${JWT}`;
 });
 
-
+//redirects to home page when logo is clicked
+$('#logo').on('click', (event) => {
+	event.preventDefault();
+	window.location.href = `/`;
+})
 

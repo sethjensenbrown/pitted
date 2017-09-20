@@ -22,3 +22,9 @@ $('#login-submit').on('click', (event) => {
 		success: res => window.location.href = `/admin-menu?jwt=${res.authToken}&user=${user}`
 	});
 });
+
+//redirects to home page when logo is clicked
+$('#logo').on('click', (event) => {
+	event.preventDefault();
+	window.location.href = `/`;
+})
