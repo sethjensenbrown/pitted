@@ -31,9 +31,15 @@ $.getJSON(`/api/admin_id?admin_id=${ADMIN_ID}&jwt=${JWT}`, res => {
 		return template;
 	});
 
-	//adds each spot element to DOM
-	template_array.forEach((template) => {
-		$('#spots-container').append(template);
+	//adds each spot element to DOM into two columns
+	template_array.forEach((template, i, template_array) => {
+		if (i < (template_array.length/2)) {
+			$('#spots-container-a').append(template.html());
+		}
+		else {
+			$('#spots-container-b').append(template.html());
+		}
+
 	});
 });
 

@@ -24,6 +24,7 @@
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <!-- logo -->
         <div id="title-bar" class="container">
             <div id="logo">
                 <h1 class="main-title">Pitted</h1>
@@ -31,24 +32,34 @@
                 <h2 class="sub-title">Find your wave</h2>
             </div>
         </div>
-        <div class="container" id="spots-container">
-            <div class="row hidden" id="spot-template">
-                <div class="col-xs-12">
-                    <h3 class="js-template-name"></h3>
-                    <img src="" class="spot-image js-template-img"/> 
-                    <p><b>Community Leader: </b><span class="js-template-username"></span></p>
-                    <p><b>Difficulty: </b><span class="js-template-difficulty"></span></p>
-                    <p><b>State: </b><span class="js-template-state"></span></p>
-                    <p><b>Latitude: </b><span class="js-template-lad"></span></p>
-                    <p><b>Longitude: </b><span class="js-template-lng"></span></p>
-                    <p><a class="js-spot-edit" value="user_id">EDIT THIS SPOT</a></p>
-                    <p><a class="js-spot-delete spot-delete" value="user_id">DELETE THIS SPOT</a></p>
-                    <hr>
-                </div>
+
+        <!-- Cntainer for spots -->
+        <p id="my-spots">My Spots</p>
+        <div class="container hidden" id="spots-container">
+            <div class="row">
+                <div class="col-sm-6" id="spots-container-a"></div>
+                <div class="col-sm-6" id="spots-container-b"></div>
             </div>
         </div>
         <a class="js-spot-add spot-add">ADD A NEW SPOT</a>
         <hr>
+
+        <!-- Spot Template -->
+        <div class="hidden" id="spot-template">
+            <div class="spots-container">
+                <h3 class="js-template-name"></h3>
+                <img src="" class="spot-image js-template-img" /> 
+                <p><b>Community Leader: </b><span class="js-template-username"></span></p>
+                <p><b>Difficulty: </b><span class="js-template-difficulty"></span></p>
+                <p><b>State: </b><span class="js-template-state"></span></p>
+                <p><b>Latitude: </b><span class="js-template-lad"></span></p>
+                <p><b>Longitude: </b><span class="js-template-lng"></span></p>
+                <p><a class="js-spot-edit" value="user_id">EDIT THIS SPOT</a></p>
+                <p><a class="js-spot-delete spot-delete" value="user_id">DELETE THIS SPOT</a></p>
+                <hr>
+            </div>
+        </div>
+
         <!-- Bootstrap core JavaScript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
