@@ -1,3 +1,16 @@
+/* For Bigger Displays */
+@media (min-width:750px) {
+
+
+}
+
+/* For Smaller Displays */
+@media (max-width:749px) {
+
+  
+
+}
+
 *{
 	font-family: 'Rock Salt'   
 }
@@ -22,33 +35,16 @@ height: 70px
   height: 30px
 }
 .spot-container {
-  width: 300px;
+  margin: auto;
+  width: 33%;
+  min-width: 300px
 }
-
-/* For Bigger Displays */
-@media (min-width:750px) {
-
-
-
-}
-
-/* For Smaller Displays */
-@media (max-width:749px) {
-
-  .spot-container {
-   margin: auto;
-  }
-
-}
-
 #map-wrapper {
   width: 100%;
   height: 300px;
-
-margin-top: 5px
+  margin-top: 5px
 }
 .search-form {
-
 	margin: auto;
   text-align: center;
   width: 300px
