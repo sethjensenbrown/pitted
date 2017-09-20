@@ -1,14 +1,14 @@
 *{
 	font-family: 'Rock Salt'   
 }
-.background{
+/*.background{
   background-image: url('jeremy-bishop-331840.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 text-align: center;
 position: relative;
-}
+}*/
 .hidden {
   display: none;
 }
@@ -36,7 +36,7 @@ height: 70px
 /* For Bigger Displays */
 @media (min-width:750px) {
 
-.whiteout {
+/*.whiteout {
   background-color: #fff;
   position: fixed;
   top: 0px;
@@ -45,7 +45,7 @@ height: 70px
   z-index: -1;
   left: 50%;
   margin-left: -350px
-}
+}*/
 
 }
 
@@ -80,7 +80,10 @@ height: 70px
 }
 .search-state {
   width: 100%;
-  height: 30px
+  height: 30px;
+border: 3px solid #3468c7;
+color: #3468c7;
+text-shadow:  none
 }
 .radio-element-label {
   font-size: 18px;
@@ -89,12 +92,15 @@ height: 70px
 .input-form {
   width: 100%;
   height: 30px;
-  margin-top: 0px
-}
-.submit-button {
+  margin-top: 0px;
+border: 3px solid #3468c7;
+color: #3468c7;
+border-radius: 6px
+}.submit-button {
   width: 100px;
   height: 30px;
-  margin-top: 15px
+  margin-top: 15px;
+  border: 3px solid #23c0af;border-radius: 6px;background-color: #23c0af;color: #fff
 }
 .login-form {
   width: 300px;
@@ -160,7 +166,7 @@ color: #3468c7;
   padding-right: 12.5px;
 }
 #title-bar {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 margin-top: 20px;
 }hr {
     border: 0;
@@ -170,7 +176,7 @@ margin-top: 20px;
   width: 100%;
 height: 100%
 }
-.whiteout2 {
+/*.whiteout2 {
   background-color: #fff;
 z-index: -1;
 position: fixed;
@@ -179,4 +185,4 @@ bottom: 0;
 margin-left: 50%;
 left: -200px;
 width: 400px
-}
+}*/
