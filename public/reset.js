@@ -30,6 +30,7 @@ $('#login-submit').on('click', (event) => {
 		var base64encodedData = btoa(ADMIN_ID + ':' + newPassword1);
 		//AJAX PUT request uses Basic Auth scheme and sends usename and new password as JSON
 		//redirects back to admin menu on success
+		console.log(`username: ${ADMIN_ID}, password: ${newPassword1}`);
 		$.ajax({
 			method: 'PUT',
 			url:`/api/users/reset`,
