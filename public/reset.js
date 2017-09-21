@@ -39,7 +39,10 @@ $('#login-submit').on('click', (event) => {
 				"username": `${ADMIN_ID}`,
 				"password": `${newPassword1}`
 			},
-			success: res => window.location.href = `/admin-menu?jwt=${JWT}&user=${ADMIN_ID}`
+			success: res => window.location.href = `/admin-menu?jwt=${JWT}&user=${ADMIN_ID}`,
+			error: (err) => {
+        		console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+    		}
 		});
 	}
 	else {
