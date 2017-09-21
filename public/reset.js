@@ -27,11 +27,9 @@ $('#login-submit').on('click', (event) => {
 	var newPassword2 = getNew2();
 	if (newPassword1 === newPassword2) {
 		//converts username and password to Base64 for authorization
-		var base64encodedData = btoa(ADMIN_ID + ':' + newPassword1);
+		var base64encodedData = btoa(ADMIN_ID + ':' + oldPassword);
 		//AJAX PUT request uses Basic Auth scheme and sends usename and new password as JSON
 		//redirects back to admin menu on success
-		console.log(`username: ${ADMIN_ID}, password: ${newPassword1}`);
-		console.log(base64encodedData);
 		$.ajax({
 			method: 'PUT',
 			url:`/api/users/reset`,
@@ -42,10 +40,7 @@ $('#login-submit').on('click', (event) => {
 				"username": "${ADMIN_ID}",
 				"password": "${newPassword1}"
 			}`,
-			success: res => window.location.href = `/admin-menu?jwt=${JWT}&user=${ADMIN_ID}`,
-			error: (err) => {
-        		console.log(err);
-    		}
+			success: res => window.location.href = `/admin-menu?jwt=${JWT}&user=${ADMIN_ID}`
 		});
 	}
 	else {
