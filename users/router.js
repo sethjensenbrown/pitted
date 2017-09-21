@@ -123,7 +123,7 @@ router.post('/', jsonParser, (req, res) => {
 });
 
 //PUT endpoint for resetting password
-router.put ('/reset/', passport.authenticate('basic', {session: false}), (req, res) => {
+router.put ('/reset', passport.authenticate('basic', {session: false}), (req, res) => {
 	//verify usename and password are included in request body
 	const requiredFields = ['username', 'password'];
 	const missingField = requiredFields.find(field => 

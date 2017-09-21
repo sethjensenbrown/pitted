@@ -36,10 +36,11 @@ $('#login-submit').on('click', (event) => {
 			url:`/api/users/reset`,
 			headers: {'Authorization': 'Basic ' + base64encodedData},
 			contentType: 'application/json',
-			data: {
-				"username": `${ADMIN_ID}`,
-				"password": `${newPassword1}`
-			},
+			dataType: 'json',
+			data: `{
+				"username": "${ADMIN_ID}",
+				"password": "${newPassword1}"
+			}`,
 			success: res => window.location.href = `/admin-menu?jwt=${JWT}&user=${ADMIN_ID}`,
 			error: (err) => {
         		console.log(err);
