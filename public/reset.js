@@ -41,7 +41,7 @@ $('#login-submit').on('click', (event) => {
 			},
 			success: res => window.location.href = `/admin-menu?jwt=${JWT}&user=${ADMIN_ID}`,
 			error: (err) => {
-        		console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+        		console.log(err);
     		}
 		});
 	}
