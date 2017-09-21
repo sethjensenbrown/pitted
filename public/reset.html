@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Password reset page for Pitted. 
+            Allows admin to reset password for Pitted admin site.
+            Created as a capstone project for the Thinkful bootcamp.">
+        <meta name="author" content="Seth Jensen Brown">
+        <title>Pitted | admin login</title>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="style.css" rel="stylesheet">
+        <!--Google Font-->
+        <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    </head>
+    <body>
+        <div id="title-bar" class="container">
+            <div id="logo">
+                <h1 class="main-title">Pitted</h1>
+                <img id="wave" src="./wave.jpg" />
+                <h2 class="sub-title">Find your wave</h2>
+            </div>
+        </div>
+        <div class="container">
+            <form role="form" class="login-form"> 
+                <label for="old-password" class="form-label">Old Password:</label>
+                <br>
+                <input type="password" class="input-form" placeholder=" *************" id="old-password">
+                <br>
+                <label for="new-password1" class="form-label">New Password:</label>
+                <br>
+                <input type="password" class="input-form" placeholder=" *************" id="new-password1">
+                <br>
+                <label for="new-password2" class="form-label">Repeat New Password:</label>
+                <br>
+                <input type="password" class="input-form" placeholder=" *************" id="new-password2">
+                <br>
+                <button type="submit" class="submit-button" id="login-submit">Submit</button>                 
+            </form>
+        </div>
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+        <!-- Link for JS file-->
+        <script src="reset.js"></script>
+    </body>
+</html>

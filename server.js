@@ -49,6 +49,11 @@ app.get('/admin-menu', passport.authenticate('jwt', {session: false}), (req, res
 app.get('/editor', passport.authenticate('jwt', {session: false}), (req, res) => {
 	res.sendFile(__dirname + '/public/editor.html')
 });
+
+//GET request for /reset displays password reset page PROTECTED
+app.get('/reset', passport.authenticate('jwt', {session: false}), (req, res) => {
+	res.sendFile(__dirname + '/public/reset.html')
+});
 /***********************************************************/
 
 //DYNAMIC API ENDPOINTS

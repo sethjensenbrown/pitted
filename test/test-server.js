@@ -383,4 +383,15 @@ describe('Pitted static pages endpoints', function() {
 		})
 	})
 
+	describe('reset page', function() {
+		it('should get an html response', function() {
+			return chai.request(app)
+					.get(`/reset?jwt=${token}`)
+					.then(function(res) {
+						res.should.have.status(200);
+						res.should.be.html;
+					})
+		})
+	})
+
 })
