@@ -277,6 +277,191 @@ describe('Users API POST endpoint', function() {
 
 
 
+describe('Users API PUT endpoint for resetting password', function() {
+	const username = 'goku_rulz';
+	const password = 'SPIRITBOMB!';
+	const firstName = 'Son';
+	const lastName = 'Goku';
+
+	before(function() {
+		return runServer(TEST_DATABASE_URL);
+	});
+
+	beforeEach(function() {
+		return User.hashPassword(password).then(password => 
+			User.create({
+				username,
+				password,
+				firstName,
+				lastName
+			})
+		);
+	});
+
+	afterEach(function() {
+		return User.remove({});
+	});
+
+	after(function() {
+		return closeServer();
+	});
+
+	it ('should reject requests with a missing username', function() {
+		return chai.request(app)
+			.put('/api/users/reset')
+			.auth(username, password)
+			.send({
+				password
+			})
+			.catch(function(err) {
+				const res = err.response;
+				res.should.be.json;
+				res.should.have.status(422);
+				res.body.reason.should.equal('ValidationError');
+				res.body.message.should.equal('Missing Field');
+				res.body.location.should.equal('username');
+			});
+	});
+	it ('should reject requests with a missing password', function() {
+		return chai.request(app)
+			.put('/api/users/reset')
+			.auth(username, password)
+			.send({
+				username
+			})
+			.catch(function(err) {
+				const res = err.response;
+				res.should.be.json;
+				res.should.have.status(422);
+				res.body.reason.should.equal('ValidationError');
+				res.body.message.should.equal('Missing Field');
+				res.body.location.should.equal('password');
+			});
+	});
+
+	it ('should reject requests with a non-string username', function() {
+		return chai.request(app)
+			.put('/api/users/reset')
+			.auth(username, password)
+			.send({
+				username: true,
+				password
+			})
+			.catch(function(err) {
+				const res = err.response;
+				res.should.be.json;
+				res.should.have.status(422);
+				res.body.reason.should.equal('ValidationError');
+				res.body.message.should.equal('Incorrect field type: expected string');
+				res.body.location.should.equal('username');
+			});
+	});
+	it ('should reject requests with a non-string password', function() {
+		return chai.request(app)
+			.put('/api/users/reset')
+			.auth(username, password)
+			.send({
+				username,
+				password: true
+			})
+			.catch(function(err) {
+				const res = err.response;
+				res.should.be.json;
+				res.should.have.status(422);
+				res.body.reason.should.equal('ValidationError');
+				res.body.message.should.equal('Incorrect field type: expected string');
+				res.body.location.should.equal('password');
+			});
+	});
+
+	it ('should reject requests with a whitespace in username', function() {
+		return chai.request(app)
+			.put('/api/users/reset')
+			.auth(username, password)
+			.send({
+				username: `  ${username}  `,
+				password
+			})
+			.catch(function(err) {
+				const res = err.response;
+				res.should.be.json;
+				res.should.have.status(422);
+				res.body.reason.should.equal('ValidationError');
+				res.body.message.should.equal('Cannot start or end with whitespace');
+				res.body.location.should.equal('username');
+			});
+	});
+	it ('should reject requests with a whitespace in password', function() {
+		return chai.request(app)
+			.put('/api/users/reset')
+			.auth(username, password)
+			.send({
+				username,
+				password: `  ${password}  `
+			})
+			.catch(function(err) {
+				const res = err.response;
+				res.should.be.json;
+				res.should.have.status(422);
+				res.body.reason.should.equal('ValidationError');
+				res.body.message.should.equal('Cannot start or end with whitespace');
+				res.body.location.should.equal('password');
+			});
+	});
+	it ('should reject requests with a password less than 5 characters', function() {
+		return chai.request(app)
+			.put('/api/users/reset')
+			.auth(username, password)
+			.send({
+				username,
+				password: '1234'
+			})
+			.catch(function(err) {
+				const res = err.response;
+				res.should.be.json;
+				res.should.have.status(422);
+				res.body.reason.should.equal('ValidationError');
+				res.body.message.should.equal('Must be at least 5 characters long');
+				res.body.location.should.equal('password');
+			});
+	});
+	it ('should reject requests with a password more than 72 characters', function() {
+		return chai.request(app)
+			.put('/api/users/reset')
+			.auth(username, password)
+			.send({
+				username,
+				password: new Array(73).fill('a').join('')
+			})
+			.catch(function(err) {
+				const res = err.response;
+				res.should.be.json;
+				res.should.have.status(422);
+				res.body.reason.should.equal('ValidationError');
+				res.body.message.should.equal('Must be at most 72 characters long');
+				res.body.location.should.equal('password');
+			});
+	});
+	it ('should update password', function() {
+		return chai.request(app)
+			.put('/api/users/reset')
+			.auth(username, password)
+			.send({
+				username,
+				password: "newPassword"
+			})
+			.then(function(_res) {
+				const res = _res;
+				res.should.be.json;
+				res.should.have.status(201);
+				res.should.be.json;
+				res.body.message.should.equal("successfully changed!");
+			});
+	});
+})
+
+
+
 
 
 
