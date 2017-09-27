@@ -40,13 +40,22 @@ $('#login-submit').on('click', (event) => {
 				"username": "${ADMIN_ID}",
 				"password": "${newPassword1}"
 			}`,
-			success: res => window.location.href = `/admin-menu?jwt=${JWT}&user=${ADMIN_ID}`
+			success: (res) => {
+				alert("Password successfully changed!");
+				window.location.href = `/admin-menu?jwt=${JWT}&user=${ADMIN_ID}`;
+			}
 		});
 	}
 	else {
 		alert("New passwords do not match. Please try again.");
 	}
 });
+
+//event handler for Go Back to Admin Menu Link click
+$('#admin-back').on('click', (event) => {
+	event.preventDefault();
+	window.location.href= `/admin-menu?user=${ADMIN_ID}&jwt=${JWT}`;
+})
 
 //redirects to home page when logo is clicked
 $('#logo').on('click', (event) => {
