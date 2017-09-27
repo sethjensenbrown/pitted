@@ -107,9 +107,7 @@ font-size: 12px
 }
 .spot-delete {
   color: #ff0000
-}
-.spot-add {
-  margin-left: 15px;
+}.menu-link {  margin-bottom: 30px;
 }
 #results-map-wrapper{
   width: 700px;
@@ -151,7 +149,7 @@ color: #3468c7;
   padding-bottom: 20px
 }
 #title-bar {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 margin-top: 20px;
 }hr {
     border: 0;

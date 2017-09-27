@@ -71,6 +71,12 @@ $('.js-spot-add').on('click', (event) => {
 	window.location.href = `/editor?user=${ADMIN_ID}&jwt=${JWT}`;
 });
 
+//event listener for RESET PASSWORD link
+$('.js-reset').on('click', (event) => {
+	//redirect to add page
+	window.location.href = `/reset?user=${ADMIN_ID}&jwt=${JWT}`;
+});
+
 //redirects to home page when logo is clicked
 $('#logo').on('click', (event) => {
 	event.preventDefault();
