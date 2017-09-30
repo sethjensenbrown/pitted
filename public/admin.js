@@ -1,11 +1,9 @@
 //first, check for jwt in cookie
 const JWT = Cookies.get('jwt');
-console.log(`JWT: "${JWT}"`);
 
 //then, check if JWT is valid
 if (JWT) {
-	console.log(`JWT exists!`);
-
+	window.location.href = `/admin-menu?jwt=${JWT}&user=${user}`
 }
 
 //if valid, login
