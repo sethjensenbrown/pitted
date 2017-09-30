@@ -9,6 +9,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "faker": "^4.1.0",
+    "js-cookie": "^2.1.4",
     "jsonwebtoken": "^7.4.3",
     "mongoose": "^4.11.8",
     "morgan": "^1.8.2",

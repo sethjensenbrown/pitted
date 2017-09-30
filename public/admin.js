@@ -1,3 +1,15 @@
+//first, check for jwt in cookie
+const JWT = Cookies.get('jwt');
+console.log(`JWT: "${JWT}"`);
+
+//then, check if JWT is valid
+if (JWT) {
+	console.log(`JWT exists!`);
+
+}
+
+//if valid, login
+
 //gets admin login id
 var getLogin = () => {
 	return $('#login-id').val();
@@ -19,7 +31,10 @@ $('#login-submit').on('click', (event) => {
 		method: 'POST',
 		url:'/api/auth/login',
 		headers: {'Authorization': 'Basic ' + base64encodedData},
-		success: res => window.location.href = `/admin-menu?jwt=${res.authToken}&user=${user}`
+		success: (res) => {
+			Cookies.set('jwt', 'res.authToken');
+			window.location.href = `/admin-menu?jwt=${res.authToken}&user=${user}`
+		}
 	});
 });
 
