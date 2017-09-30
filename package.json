@@ -11,6 +11,7 @@
     "faker": "^4.1.0",
     "js-cookie": "^2.1.4",
     "jsonwebtoken": "^7.4.3",
+    "jwt-decode": "^2.2.0",
     "mongoose": "^4.11.8",
     "morgan": "^1.8.2",
     "passport": "^0.4.0",

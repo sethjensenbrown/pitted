@@ -3,6 +3,7 @@ const JWT = Cookies.get('jwt');
 
 //then, check if JWT is valid
 if (JWT) {
+	console.log(jwt_decode(JWT));
 	window.location.href = `/admin-menu?jwt=${JWT}&user=${user}`
 }
 
