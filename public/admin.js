@@ -32,7 +32,7 @@ $('#login-submit').on('click', (event) => {
 		url:'/api/auth/login',
 		headers: {'Authorization': 'Basic ' + base64encodedData},
 		success: (res) => {
-			Cookies.set('jwt', 'res.authToken');
+			Cookies.set('jwt', `${res.authToken}`);
 			window.location.href = `/admin-menu?jwt=${res.authToken}&user=${user}`
 		}
 	});
