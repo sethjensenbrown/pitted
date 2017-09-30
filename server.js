@@ -3,6 +3,7 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
@@ -19,6 +20,7 @@ const {SurfSpots} = require('./models');
 const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(morgan('common'));
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
