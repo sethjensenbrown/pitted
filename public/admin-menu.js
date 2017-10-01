@@ -1,6 +1,6 @@
 //first, check for jwt in cookie
 const JWT = Cookies.get('jwt');
-const ADMIN_ID = "";
+let ADMIN_ID;
 
 //if JWT exists, extract admin_id
 if (JWT) {
