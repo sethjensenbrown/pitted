@@ -28,6 +28,7 @@ $('#login-submit').on('click', (event) => {
 		method: 'POST',
 		url:'/api/auth/login',
 		headers: {'Authorization': 'Basic ' + base64encodedData},
+		//if successful, creates a cookie for the jwt and redirects to admin-menu
 		success: (res) => {
 			Cookies.set('jwt', `${res.authToken}`);
 			window.location.href = `/admin-menu?jwt=${res.authToken}&user=${user}`
