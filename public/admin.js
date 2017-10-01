@@ -4,7 +4,7 @@ const JWT = Cookies.get('jwt');
 //if JWT exists, redirects to admin-menu
 if (JWT) {
 	let user = jwt_decode(JWT).user.username;
-	window.location.href = `/admin-menu?jwt=${JWT}&user=${user}`
+	//window.location.href = `/admin-menu?jwt=${JWT}&user=${user}`
 }
 
 //gets admin login id
