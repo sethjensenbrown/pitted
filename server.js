@@ -45,6 +45,7 @@ app.get('/admin', (req, res) => {
 		res.redirect('/admin-menu')
 	}
 	else {
+		res.status(302).json({message: "Already logged in"});
 		res.sendFile(__dirname + '/public/admin.html')
 	}
 });
@@ -55,6 +56,7 @@ app.get('/admin-menu', (req, res) => {
 		res.sendFile(__dirname + '/public/admin-menu.html')
 	}
 	else {
+		res.status(302).json({message: "Login to access this page"});
 		res.redirect('/admin')
 	}
 });
@@ -65,6 +67,7 @@ app.get('/editor', (req, res) => {
 		res.sendFile(__dirname + '/public/editor.html')
 	}
 	else {
+		res.status(302).json({message: "Login to access this page"});
 		res.redirect('/admin')
 	}
 });
@@ -75,6 +78,7 @@ app.get('/reset', (req, res) => {
 		res.sendFile(__dirname + '/public/reset.html')
 	}
 	else {
+		res.status(302).json({message: "Login to access this page"});
 		res.redirect('/admin')
 	}
 });
