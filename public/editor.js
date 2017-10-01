@@ -1,8 +1,23 @@
+//first, check for jwt in cookie
+const JWT = Cookies.get('jwt');
+const ADMIN_ID = "";
+
+//if JWT exists, extract admin_id
+if (JWT) {
+	ADMIN_ID = jwt_decode(JWT).user.username
+}
+//otherwise, redirect to login page
+else {
+	window.location.href = `/admin`
+}
+
+
+
 //creates an object that holds the key value pairs from the URL query
 //should have values for _id, user, and jwt 
 const query = new URLSearchParams(window.location.search);
-const ADMIN_ID = query.get('user');
-const JWT = query.get('jwt');
+//const ADMIN_ID = query.get('user');
+//const JWT = query.get('jwt');
 const SPOT_ID = query.get('_id');
 var LATITUDE = 37.09024;
 var LONGITUDE = -95.712891;

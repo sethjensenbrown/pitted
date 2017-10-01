@@ -1,8 +1,23 @@
+//first, check for jwt in cookie
+const JWT = Cookies.get('jwt');
+const ADMIN_ID = "";
+
+//if JWT exists, extract admin_id
+if (JWT) {
+	ADMIN_ID = jwt_decode(JWT).user.username
+}
+//otherwise, redirect to login page
+else {
+	window.location.href = `/admin`
+}
+
+/*
 //creates an object that holds the key value pairs from the URL query
 //should have values for user and jwt 
 const query = new URLSearchParams(window.location.search);
 const ADMIN_ID = query.get('user');
 const JWT = query.get('jwt');
+*/
 
 //gets and displays all spot info for spots created by user that logs in
 $.getJSON(`/api/admin_id?admin_id=${ADMIN_ID}&jwt=${JWT}`, res => {
