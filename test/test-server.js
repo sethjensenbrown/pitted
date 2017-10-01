@@ -351,7 +351,7 @@ describe('Pitted static pages endpoints', function() {
 	})
 
 	describe('admin page', function() {
-		it('should get an html response', function() {
+		it('should get an html response without jwt', function() {
 			return chai.request(app)
 					.get('/admin')
 					.then(function(res) {
@@ -359,36 +359,72 @@ describe('Pitted static pages endpoints', function() {
 						res.should.be.html;
 					})
 		})
+		it('should redirect if jwt is present in cookie', function() {
+			return chai.request(app)
+					.get('/admin')
+					.set('Cookie', `jwt=${token}`)
+					.then(function(res) {
+						res.should.have.status(302);
+						res.should.be.html;
+					})
+		})
 	})
 
 	describe('admin menu page', function() {
-		it('should get an html response', function() {
+		it('should get an html response if jwt is present in cookie', function() {
 			return chai.request(app)
-					.get(`/admin-menu?jwt=${token}`)
+					.get(`/admin-menu`)
+					.set('Cookie', `jwt=${token}`)
 					.then(function(res) {
 						res.should.have.status(200);
+						res.should.be.html;
+					})
+		})
+		it('should redirect if jwt is not present in cookie', function() {
+			return chai.request(app)
+					.get(`/admin-menu`)
+					.then(function(res) {
+						res.should.have.status(302);
 						res.should.be.html;
 					})
 		})
 	})
 
 	describe('editor page', function() {
-		it('should get an html response', function() {
+		it('should get an html response if jwt is present in cookie', function() {
 			return chai.request(app)
-					.get(`/editor?jwt=${token}`)
+					.get(`/editor`)
+					.set('Cookie', `jwt=${token}`)
 					.then(function(res) {
 						res.should.have.status(200);
+						res.should.be.html;
+					})
+		})
+		it('should redirect if jwt is not present in cookie', function() {
+			return chai.request(app)
+					.get(`/editor`)
+					.then(function(res) {
+						res.should.have.status(302);
 						res.should.be.html;
 					})
 		})
 	})
 
 	describe('reset page', function() {
-		it('should get an html response', function() {
+		it('should get an html response if jwt is present in cookie', function() {
 			return chai.request(app)
-					.get(`/reset?jwt=${token}`)
+					.get(`/reset`)
+					.set('Cookie', `jwt=${token}`)
 					.then(function(res) {
 						res.should.have.status(200);
+						res.should.be.html;
+					})
+		})
+		it('should redirect if jwt is not present in cookie', function() {
+			return chai.request(app)
+					.get(`/reset`)
+					.then(function(res) {
+						res.should.have.status(302);
 						res.should.be.html;
 					})
 		})
