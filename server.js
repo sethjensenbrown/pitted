@@ -43,17 +43,17 @@ app.get('/admin', (req, res) => {
 });
 
 //GET request for /admin-menu displays admin menu page PROTECTED
-app.get('/admin-menu', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.get('/admin-menu', (req, res) => {
 	res.sendFile(__dirname + '/public/admin-menu.html')
 });
 
 //GET request for /editor displays spot editor page PROTECTED
-app.get('/editor', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.get('/editor', (req, res) => {
 	res.sendFile(__dirname + '/public/editor.html')
 });
 
 //GET request for /reset displays password reset page PROTECTED
-app.get('/reset', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.get('/reset', (req, res) => {
 	res.sendFile(__dirname + '/public/reset.html')
 });
 /***********************************************************/
