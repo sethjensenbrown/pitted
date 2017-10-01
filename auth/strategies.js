@@ -35,18 +35,9 @@ basicStrategy = new BasicStrategy((username, password, callback) => {
 		});
 });
 
-var cookieExtractor = (req) => {
-    var token = null;
-    if (req && req.cookies)
-    {
-        token = req.cookies['jwt'];
-    }
-    return token;
-};
-
 const jwtStrategy = new JwtStrategy({
 		secretOrKey: JWT_SECRET,
-		jwtFromRequest: cookieExtractor(req),
+		jwtFromRequest: ExtractJwt.fromUrlQueryParameter('jwt'),
 		algorithms: ['HS256']
 	},
 	(payload, done) => {
