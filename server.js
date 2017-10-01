@@ -31,6 +31,8 @@ passport.use(jwtStrategy);
 /***********************************************************/
 
 //STATIC PAGES ENDPOINTS
+//PROTECTED enpoints check for JWT in cookies and redirect to login if not present
+
 
 //GET request for / displays home page, search for spots here
 app.get('/', (req, res) => {
@@ -39,22 +41,42 @@ app.get('/', (req, res) => {
 
 //GET request for /admin displays admin login page
 app.get('/admin', (req, res) => {
-	res.sendFile(__dirname + '/public/admin.html')
+	if(req.cookies.jwt) {
+		res.redirect('/admin-menu')
+	}
+	else {
+		res.sendFile(__dirname + '/public/admin.html')
+	}
 });
 
-//GET request for /admin-menu displays admin menu page PROTECTED
+//GET request for /admin-menu displays admin menu page
 app.get('/admin-menu', (req, res) => {
-	res.sendFile(__dirname + '/public/admin-menu.html')
+	if(req.cookies.jwt) {
+		res.sendFile(__dirname + '/public/admin-menu.html')
+	}
+	else {
+		res.redirect('/admin')
+	}
 });
 
-//GET request for /editor displays spot editor page PROTECTED
+//GET request for /editor displays spot editor page
 app.get('/editor', (req, res) => {
-	res.sendFile(__dirname + '/public/editor.html')
+	if(req.cookies.jwt) {
+		res.sendFile(__dirname + '/public/editor.html')
+	}
+	else {
+		res.redirect('/admin')
+	}
 });
 
-//GET request for /reset displays password reset page PROTECTED
+//GET request for /reset displays password reset page
 app.get('/reset', (req, res) => {
-	res.sendFile(__dirname + '/public/reset.html')
+	if(req.cookies.jwt) {
+		res.sendFile(__dirname + '/public/reset.html')
+	}
+	else {
+		res.redirect('/admin')
+	}
 });
 /***********************************************************/
 
