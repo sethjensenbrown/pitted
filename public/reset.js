@@ -11,13 +11,6 @@ else {
 	window.location.href = `/admin`
 }
 
-
-//creates an object that holds the key value pairs from the URL query
-//should have values for user, and jwt 
-const query = new URLSearchParams(window.location.search);
-//const ADMIN_ID = query.get('user');
-//const JWT = query.get('jwt');
-
 //gets old password
 var getOld = () => {
 	return $('#old-password').val();
@@ -56,7 +49,7 @@ $('#login-submit').on('click', (event) => {
 			}`,
 			success: (res) => {
 				alert("Password successfully changed!");
-				window.location.href = `/admin-menu?jwt=${JWT}&user=${ADMIN_ID}`;
+				window.location.href = `/admin-menu`;
 			}
 		});
 	}
@@ -68,11 +61,5 @@ $('#login-submit').on('click', (event) => {
 //event handler for Go Back to Admin Menu Link click
 $('#admin-back').on('click', (event) => {
 	event.preventDefault();
-	window.location.href= `/admin-menu?user=${ADMIN_ID}&jwt=${JWT}`;
-})
-
-//redirects to home page when logo is clicked
-$('#logo').on('click', (event) => {
-	event.preventDefault();
-	window.location.href = `/`;
+	window.location.href= `/admin-menu`;
 })
