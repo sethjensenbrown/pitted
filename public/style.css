@@ -13,10 +13,9 @@
 
 *{
 	font-family: 'Rock Salt'   
-}
-.hidden {
+}/* .hidden {
   display: none;
-}
+} */
 .main-title {
   margin: 0px;
   font-size: 55px;
@@ -179,6 +178,10 @@ margin: auto
 text-align: left
 }
 p {
+  font-family: ubuntu;
+font-size: 14px
+}
+p > b, span {
   font-family: ubuntu;
 font-size: 14px
 }
