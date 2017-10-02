@@ -178,11 +178,7 @@ margin: auto
   margin: auto;
 text-align: left
 }
-.instructions > p {
-  font-family: ubuntu;
-font-size: 14px
-}
-.spot-container > p {
+p {
   font-family: ubuntu;
 font-size: 14px
 }
