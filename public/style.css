@@ -75,7 +75,6 @@ font-family: ubuntu
   height: 30px;
   margin-top: 0px;
 border: 3px solid #3468c7;
-color: #3468c7;
 border-radius: 6px;
 font-size: 14px;
 font-family: ubuntu
@@ -188,6 +187,10 @@ font-size: 14px;
 font-weight: bold
 }
 p > span {
+  font-family: ubuntu;
+font-size: 14px
+}
+p > a {
   font-family: ubuntu;
 font-size: 14px
 }
