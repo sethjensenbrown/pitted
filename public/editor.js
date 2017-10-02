@@ -6,10 +6,6 @@ let ADMIN_ID;
 if (JWT) {
 	ADMIN_ID = jwt_decode(JWT).user.username
 }
-//otherwise, redirect to login page
-else {
-	window.location.href = `/admin`
-}
 
 //gets spot id from url query 
 const query = new URLSearchParams(window.location.search);

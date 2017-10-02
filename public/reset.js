@@ -6,10 +6,6 @@ let ADMIN_ID;
 if (JWT) {
 	ADMIN_ID = jwt_decode(JWT).user.username
 }
-//otherwise, redirect to login page
-else {
-	window.location.href = `/admin`
-}
 
 //gets old password
 var getOld = () => {
