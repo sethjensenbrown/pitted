@@ -167,7 +167,8 @@ height: 100%
   margin-bottom: 20px;
 font-size: 20px;
 text-decoration: underline;
-letter-spacing: 3px
+letter-spacing: 3px;
+font-family: rock salt
 }
 #editor-form {
   width: 300px;
@@ -181,7 +182,12 @@ p {
   font-family: ubuntu;
 font-size: 14px
 }
-p > b, span {
+p > b {
+  font-family: ubuntu;
+font-size: 14px;
+font-weight: bold
+}
+p > span {
   font-family: ubuntu;
 font-size: 14px
 }
