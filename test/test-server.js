@@ -364,8 +364,7 @@ describe('Pitted static pages endpoints', function() {
 					.get('/admin')
 					.set('Cookie', `jwt=${token}`)
 					.then(function(res) {
-						res.should.have.status(302);
-						res.should.be.html;
+						res.should.redirect;
 					})
 		})
 	})
@@ -384,8 +383,7 @@ describe('Pitted static pages endpoints', function() {
 			return chai.request(app)
 					.get(`/admin-menu`)
 					.then(function(res) {
-						res.should.have.status(302);
-						res.should.be.html;
+						res.should.redirect;
 					})
 		})
 	})
@@ -404,8 +402,7 @@ describe('Pitted static pages endpoints', function() {
 			return chai.request(app)
 					.get(`/editor`)
 					.then(function(res) {
-						res.should.have.status(302);
-						res.should.be.html;
+						res.should.redirect;
 					})
 		})
 	})
@@ -424,8 +421,7 @@ describe('Pitted static pages endpoints', function() {
 			return chai.request(app)
 					.get(`/reset`)
 					.then(function(res) {
-						res.should.have.status(302);
-						res.should.be.html;
+						res.should.redirect;
 					})
 		})
 	})
