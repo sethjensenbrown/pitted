@@ -14,20 +14,16 @@ const createAuthToken = user => {
 };
 
 router.post('/login', 
-	passport.authenticate('basic', {session: false}), 
+	passport.authenticate('basic', {
+		session: false, 
+		failureRedirect: '/admin', 
+		failureFlash: 'Invalid username or password.'
+	}), 
 	(req, res) => {
 		const authToken = createAuthToken(req.user.apiRepr());
 		res.json({authToken});
 	}
 );
-
-router.post('/refresh', 
-	passport.authenticate('jwt', {session:false}),
-	(req, res) => {
-		const authToken = createAuthToken(req.user);
-		res.json({authToken});
-	}
-)
 
 module.exports = {router};
 

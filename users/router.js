@@ -123,91 +123,96 @@ router.post('/', jsonParser, (req, res) => {
 });
 
 //PUT endpoint for resetting password
-router.put ('/reset', passport.authenticate('basic', {session: false}), (req, res) => {
-	//verify usename and password are included in request body
-	const requiredFields = ['username', 'password'];
-	const missingField = requiredFields.find(field => 
-		!(field in req.body)
-	);
-	if (missingField) {
-		return res.status(422).json({
-			code: 422,
-			reason: `ValidationError`,
-			message: `Missing Field`,
-			location: missingField
-		});
+router.put ('/reset', 
+	passport.authenticate('basic', {
+		session: false, 
+		failureRedirect: '/reset', 
+		failureFlash: 'Invalid password.'
+	}), 
+	(req, res) => {
+		//verify usename and password are included in request body
+		const requiredFields = ['username', 'password'];
+		const missingField = requiredFields.find(field => 
+			!(field in req.body)
+		);
+		if (missingField) {
+			return res.status(422).json({
+				code: 422,
+				reason: `ValidationError`,
+				message: `Missing Field`,
+				location: missingField
+			});
+		}
+
+		//verify all expected fields in request body are strings
+		const stringFields = ['username', 'password'];
+		const notString = stringFields.find(field => 
+			(field in req.body) && typeof req.body[field] !== 'string'
+		);
+		if (notString) {
+			return res.status(422).json({
+				code: 422,
+				reason: `ValidationError`,
+				message: `Incorrect field type: expected string`,
+				location: notString
+			});
+		}
+
+		//verify that username and password have NO whitespace
+		const doNotTrim = ['username', 'password'];
+		const cannotTrim = doNotTrim.find(field => 
+			req.body[field].trim() !== req.body[field]
+		);
+		if (cannotTrim) {
+			return res.status(422).json({
+				code: 422,
+				reason: `ValidationError`,
+				message: `Cannot start or end with whitespace`,
+				location: cannotTrim
+			});
+		}
+
+		//password must be between 5 and 72 characters
+		if (req.body['password'].trim().length < 5) {
+			return res.status(422).json({
+				code: 422,
+				reason: `ValidationError`,
+				message: `Must be at least 5 characters long`,
+				location: `password`
+			});
+		}
+		if (req.body['password'].trim().length > 72) {
+			return res.status(422).json({
+				code: 422,
+				reason: `ValidationError`,
+				message: `Must be at most 72 characters long`,
+				location: `password`
+			});
+		}
+
+		//create variables to hold request values
+		let {username, password} = req.body;
+
+		//update password
+		return User
+			//first hash the password
+			.hashPassword(password)
+			.then((hash) => {
+				return User
+					//then update password in the database
+					.update({ username }, { password: hash})
+			})
+			.then(() => {
+				return res.status(201).json({"message": "successfully changed!"});
+			})
+			.catch(err => {
+				if (err.reason === `ValidationError`) {
+					return res.status(err.code).json(err);
+				}
+				res.status(500).json({code: 500, message: `Internal server error`})
+			});
 	}
-
-	//verify all expected fields in request body are strings
-	const stringFields = ['username', 'password'];
-	const notString = stringFields.find(field => 
-		(field in req.body) && typeof req.body[field] !== 'string'
-	);
-	if (notString) {
-		return res.status(422).json({
-			code: 422,
-			reason: `ValidationError`,
-			message: `Incorrect field type: expected string`,
-			location: notString
-		});
-	}
-
-	//verify that username and password have NO whitespace
-	const doNotTrim = ['username', 'password'];
-	const cannotTrim = doNotTrim.find(field => 
-		req.body[field].trim() !== req.body[field]
-	);
-	if (cannotTrim) {
-		return res.status(422).json({
-			code: 422,
-			reason: `ValidationError`,
-			message: `Cannot start or end with whitespace`,
-			location: cannotTrim
-		});
-	}
-
-	//password must be between 5 and 72 characters
-	if (req.body['password'].trim().length < 5) {
-		return res.status(422).json({
-			code: 422,
-			reason: `ValidationError`,
-			message: `Must be at least 5 characters long`,
-			location: `password`
-		});
-	}
-	if (req.body['password'].trim().length > 72) {
-		return res.status(422).json({
-			code: 422,
-			reason: `ValidationError`,
-			message: `Must be at most 72 characters long`,
-			location: `password`
-		});
-	}
-
-	//create variables to hold request values
-	let {username, password} = req.body;
-
-	//update password
-	return User
-		//first hash the password
-		.hashPassword(password)
-		.then((hash) => {
-			return User
-				//then update password in the database
-				.update({ username }, { password: hash})
-		})
-		.then(() => {
-			return res.status(201).json({"message": "successfully changed!"});
-		})
-		.catch(err => {
-			if (err.reason === `ValidationError`) {
-				return res.status(err.code).json(err);
-			}
-			res.status(500).json({code: 500, message: `Internal server error`})
-		});
-
-
-})
+)
 
 module.exports = {router};
 
