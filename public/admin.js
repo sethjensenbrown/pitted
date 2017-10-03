@@ -31,6 +31,9 @@ $('#login-submit').on('click', (event) => {
 		success: (res) => {
 			Cookies.set('jwt', `${res.authToken}`);
 			window.location.href = `/admin-menu`
+		},
+		error: () => {
+			alert('Login failed, please try again');
 		}
 	});
 });
