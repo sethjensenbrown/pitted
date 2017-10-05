@@ -6,6 +6,13 @@ if (JWT) {
 	window.location.href = `/admin-menu`
 }
 
+//then checks for failed login parameter in url
+const query = new URLSearchParams(window.location.search);
+const login = query.get('login');
+if (login === "failed") {
+	alert("Login failed, please try again.");
+} 
+
 //gets admin login id
 var getLogin = () => {
 	return $('#login-id').val();
