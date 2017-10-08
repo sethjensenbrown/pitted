@@ -6,14 +6,6 @@ if (JWT) {
 	window.location.href = `/admin-menu`
 }
 
-//then check url to see if login failed
-const query = new URLSearchParams(window.location.search);
-const loginStatus = query.get('login');
-console.log(`login status: ${loginStatus}`);
-if (loginStatus === 'false') {
-	alert('Login failed, please try again')
-}
-
 //gets admin login id
 var getLogin = () => {
 	return $('#login-id').val();
@@ -42,11 +34,11 @@ $('#login-submit').on('click', (event) => {
 				window.location.href = `/admin-menu`
 			}
 			else {
-				window.location.href = '/admin?login=false'
+				alert('Login failed, please try again')
 			}
 		},
 		error: () => {
-			window.location.href = '/admin?login=false'
+			alert('Login failed, please try again')
 		}
 	});
 });
