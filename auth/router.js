@@ -23,17 +23,9 @@ router.post('/login', (req, res) => {
 			}
 			const authToken = createAuthToken(req.user.apiRepr());
 			return res.json({authToken});
-		}
+		})
 	}
 );
-
-router.post('/refresh', 
-	passport.authenticate('jwt', {session:false}),
-	(req, res) => {
-		const authToken = createAuthToken(req.user);
-		res.json({authToken});
-	}
-)
 
 module.exports = {router};
 
