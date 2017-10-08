@@ -41,11 +41,12 @@ $('#login-submit').on('click', (event) => {
 				Cookies.set('jwt', `${res.authToken}`);
 				window.location.href = `/admin-menu`
 			}
-		},
-		error: () => {
-			if (res.redirect) {
+			else {
 				window.location.href = '/admin?login=false'
 			}
+		},
+		error: () => {
+			window.location.href = '/admin?login=false'
 		}
 	});
 });
