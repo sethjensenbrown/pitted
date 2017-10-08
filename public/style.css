@@ -196,11 +196,10 @@ p > a {
 font-size: 14px
 }body {
 background-image: url('jeremy-bishop-331840.jpg');background-repeat: no-repeat;background-position: left top;background-attachment: fixed;background-size: cover
-}
-.background-container {
+}.background-container {
   width: 100%;
 height: 100%;
-position: fixed
+position: fixed;z-index: -1;margin: 0px;padding: 0px
 }
 .background-row {
   height: 100%;
@@ -209,5 +208,6 @@ margin: 0px;
 padding: 0px
 }
 #whiteout {
-  background-color: #fff
+  background-color: #fff;
+height: 100%
 }
