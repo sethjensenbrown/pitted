@@ -37,8 +37,13 @@ $('#login-submit').on('click', (event) => {
 		headers: {'Authorization': 'Basic ' + base64encodedData},
 		//if successful, creates a cookie for the jwt and redirects to admin-menu
 		success: (res) => {
-			Cookies.set('jwt', `${res.authToken}`);
-			window.location.href = `/admin-menu`
+			if (res.authToken) { 
+				Cookies.set('jwt', `${res.authToken}`);
+				window.location.href = `/admin-menu`
+			}
+			if (res.redirect) {
+				window.location.href = '/admin?login=false'
+			}
 		}
 	});
 });

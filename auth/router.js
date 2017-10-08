@@ -19,7 +19,7 @@ router.post('/login', (req, res, next) => {
 				return next(err);
 			}
 			if (!user) {
-				return res.redirect('/admin?login=false');
+				return res.status(401).json({redirect: true});
 			}
 			const authToken = createAuthToken(user.apiRepr());
 			return res.json({authToken});
