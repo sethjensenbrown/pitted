@@ -4,7 +4,7 @@ const {Strategy: JwtStrategy, ExtractJwt} = require('passport-jwt');
 const {User} = require('../users/models');
 const {JWT_SECRET} = require('../config');
 
-/*basicStrategy = new BasicStrategy((username, password, callback) => {
+basicStrategy = new BasicStrategy((username, password, callback) => {
 	let user;
 	User
 		.findOne({username: username})
@@ -33,18 +33,8 @@ const {JWT_SECRET} = require('../config');
 			}
 			return callback(err, false);
 		});
-});*/
+});
 
-basicStrategy = new BasicStrategy(
-	function(userid, password, done) {
-		User.findOne({ username: userid }, function (err, user) {
-			if (err) { return done(err); }
-			if (!user) { return done(null, false); }
-			if (!user.validatePassword(password)) { return done(null, false); }
-			return done(null, user);
-		});
-	}
-);
 
 const jwtStrategy = new JwtStrategy({
 		secretOrKey: JWT_SECRET,

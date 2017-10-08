@@ -13,17 +13,17 @@ const createAuthToken = user => {
 	});
 };
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
 		passport.authenticate('basic', function(err, user, info) {
 			if (err) {
-				return next(err)
+				return next(err);
 			}
 			if (!user) {
-				return res.redirect('/admin?login=false')
+				return res.redirect('/admin?login=false');
 			}
-			const authToken = createAuthToken(req.user.apiRepr());
+			const authToken = createAuthToken(user.apiRepr());
 			return res.json({authToken});
-		})
+		})(req, res, next);
 	}
 );
 
