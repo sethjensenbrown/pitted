@@ -19,11 +19,10 @@ height: 70px
 .search-input {  
   width: 200px; 
   height: 30px
-}.spots-container {
+}.spot-container {
   margin: auto;
   width: 33%;
-  min-width: 200px;
-  height: 500px
+  min-width: 200px;height: 500px;
 }
 #map-wrapper {
   width: 65%;
