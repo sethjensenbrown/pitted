@@ -1,16 +1,3 @@
-/* For Bigger Displays */
-@media (min-width:750px) {
-
-
-}
-
-/* For Smaller Displays */
-@media (max-width:749px) {
-
-  
-
-}
-
 *{
 	font-family: 'Rock Salt'   
 }/* .hidden {
@@ -41,7 +28,8 @@ height: 70px
 #map-wrapper {
   width: 100%;
   height: 300px;
-  margin-top: 5px
+  margin: auto;
+  padding-top: 5px
 }
 .search-form {
 	margin: auto;
@@ -90,7 +78,7 @@ font-family: ubuntu
 }
 .spot-image {
   width: 33%;
-  min-width: 300px;
+  min-width: 200px;
   margin-top: 15px;
   margin-bottom: 15px
 }
