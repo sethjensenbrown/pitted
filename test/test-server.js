@@ -16,7 +16,7 @@ chai.use(chaiHttp);
 function seedBlogPostData() {
 	console.log('seeding blog post data');
 	SurfSpots.insertMany(TEST_SPOTS_SEED_DATA);
-	return SurfSpots.ensureIndexes();
+	return SurfSpots.createIndexes();
 };
 
 function tearDownDb() {
